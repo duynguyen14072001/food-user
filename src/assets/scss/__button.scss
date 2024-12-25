@@ -1,0 +1,27 @@
+.ant-btn {
+    padding: 0 40px;
+    @include center_flex;
+
+    span {
+        color: var(--vt-c-main);
+    }
+
+    &:hover {
+        background-color: var(--vt-c-main);
+        span {
+            color: var(--vt-c-white);
+        }
+    }
+}
+
+.ant-btn-primary {
+    span {
+        color: var(--vt-c-white);
+    }
+}
+
+.sbm{
+    img{
+        width: 20px;
+    }
+}
