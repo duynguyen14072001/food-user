@@ -17,9 +17,9 @@ export default {
         submit: 'OK',
     },
     modal: {
-        delete:{
-            title:'Xác nhận',
-            content:'Bạn có chắc chắn muốn xóa không?'
-        }
-    }
+        delete: {
+            title: 'Xác nhận',
+            content: 'Bạn có chắc chắn muốn xóa không?',
+        },
+    },
 }

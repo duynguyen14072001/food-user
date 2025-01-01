@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { AppHeaderVue, AppSidebarVue } from '.'
+import { AppFooterVue, AppHeaderVue } from '.'
 </script>
 
 <template>
     <a-layout>
-        <AppSidebarVue />
         <a-layout-content>
             <AppHeaderVue />
             <router-view />
+            <AppFooterVue />
         </a-layout-content>
     </a-layout>
 </template>

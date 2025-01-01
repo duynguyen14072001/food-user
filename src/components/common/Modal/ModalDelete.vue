@@ -32,12 +32,12 @@ const props = defineProps(['open', 'loading'])
 </template>
 
 <style scoped lang="scss">
-.title-modal{
+.title-modal {
     text-align: center;
     margin-bottom: 10px;
 }
 
-.content{
+.content {
     text-align: center;
 }
 

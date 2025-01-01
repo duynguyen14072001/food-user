@@ -2,8 +2,7 @@ import type { PaginateParams, ResponseResult } from './commonInterface'
 
 export interface User {
     id: number
-    first_name: string
-    last_name: string
+    name: string
     email: string
     created_at?: string
     updated_at?: string
@@ -11,17 +10,13 @@ export interface User {
 
 export interface UserDetail {
     id: number
-    username: string
+    name: string
     mail_address: string
     created_at: string
 }
 
-export interface UserSearchDto {
-    search: string
-}
-
 export interface UserCreateDto {
-    username: string
+    name: string
     mail_address: string
 }
 

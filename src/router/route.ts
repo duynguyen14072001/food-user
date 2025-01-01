@@ -20,6 +20,8 @@ const ifNotAuthenticated = (to: any, from: any, next: any) => {
 export const routes: any = [
     {
         path: '/',
+        component: Page.Home,
+        name: 'home',
         children: [
             {
                 path: 'login',
@@ -42,61 +44,6 @@ export const routes: any = [
                 path: 'reset-password',
                 name: 'reset-password',
                 component: Page.ResetPassword,
-            },
-            {
-                path: 'products',
-                children: [
-                    {
-                        path: '',
-                        name: 'products-list',
-                        component: Page.ProductsView,
-                        beforeEnter: ifAuthenticated,
-                    },
-                ],
-            },
-            {
-                path: 'users',
-                children: [
-                    {
-                        path: '',
-                        name: 'users-list',
-                        component: Page.UsersView,
-                        beforeEnter: ifAuthenticated,
-                    },
-                ],
-            },
-            {
-                path: 'orders',
-                children: [
-                    {
-                        path: '',
-                        name: 'orders-list',
-                        component: Page.OrdersView,
-                        beforeEnter: ifAuthenticated,
-                    },
-                ],
-            },
-            {
-                path: 'coupons',
-                children: [
-                    {
-                        path: '',
-                        name: 'coupons-list',
-                        component: Page.CouponsView,
-                        beforeEnter: ifAuthenticated,
-                    },
-                ],
-            },
-            {
-                path: 'categories',
-                children: [
-                    {
-                        path: '',
-                        name: 'categories-list',
-                        component: Page.CategoriesView,
-                        beforeEnter: ifAuthenticated,
-                    },
-                ],
             },
             {
                 path: ':pathMatch(.*)*',
