@@ -2,7 +2,7 @@
 import { reactive } from 'vue'
 import { useI18n } from 'vue3-i18n'
 import { useRouter } from 'vue-router'
-import { ruleForm } from '../shared'
+import { ruleLogin } from '../shared'
 import { useAuthStore } from '@/stores/auth'
 import type { LoginDto } from '@/interface'
 import { INITIAL_LOGIN } from '../shared'
@@ -23,7 +23,7 @@ const onFinish = async (values: any) => {
     }
 
     notify(message, t('success'), 'success')
-    router.push({ name: 'manga-list' })
+    router.push({ name: 'home' })
 }
 
 const onFinishFailed = (errorInfo: any) => {
@@ -45,7 +45,7 @@ const trim = (field: 'mail_address' | 'password') => {
         autocomplete="off"
         ref="ruleFormRef"
         :model="formState"
-        :rules="ruleForm"
+        :rules="ruleLogin"
         :colon="false"
         @finish="onFinish"
         @finishFailed="onFinishFailed"

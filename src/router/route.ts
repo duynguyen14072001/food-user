@@ -20,9 +20,13 @@ const ifNotAuthenticated = (to: any, from: any, next: any) => {
 export const routes: any = [
     {
         path: '/',
-        component: Page.Home,
-        name: 'home',
         children: [
+            {
+                path: '',
+                name: 'home',
+                component: Page.Home,
+                beforeEnter: ifAuthenticated,
+            },
             {
                 path: 'login',
                 name: 'login',

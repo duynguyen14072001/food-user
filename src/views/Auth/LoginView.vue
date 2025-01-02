@@ -20,7 +20,7 @@ const onFinish = async (values: any) => {
         return notify(t('auth_failed'), '', 'error')
     }
     notify(message, t('login_success'), 'success')
-    router.push({ name: 'products-list' })
+    router.push({ name: 'home' })
 }
 </script>
 
