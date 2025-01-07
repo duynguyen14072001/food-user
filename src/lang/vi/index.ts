@@ -1,15 +1,15 @@
 import auth from './auth'
 import base from './base'
-import sidebar from './sidebar'
 import validation from './validation'
 import products from './products'
-import categories from './categories'
+import header from './header'
+import footer from './footer'
 
 export const vi = {
     ...base,
     auth,
     validation,
-    sidebar,
     products,
-    categories,
+    header,
+    footer,
 }

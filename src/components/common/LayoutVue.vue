@@ -6,7 +6,7 @@ import { AppFooterVue, AppHeaderVue } from '.'
     <a-layout>
         <a-layout-content>
             <AppHeaderVue />
-            <router-view />
+            <div class="main"><router-view /></div>
             <AppFooterVue />
         </a-layout-content>
     </a-layout>
@@ -18,6 +18,12 @@ import { AppFooterVue, AppHeaderVue } from '.'
     flex-direction: row;
     .ant-menu {
         max-width: 200px;
+    }
+
+    .ant-layout-content {
+        .main {
+            min-height: calc(100vh - 100px);
+        }
     }
 }
 </style>

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { PAYLOAD_ALL } from '@/helpers';
-import { useProductStore } from '@/stores';
-import { onMounted, ref } from 'vue';
+import { PAYLOAD_ALL } from '@/helpers'
+import { useProductStore } from '@/stores'
+import { onMounted, ref } from 'vue'
 
 const productStore = useProductStore()
 const loading = ref()
 
-onMounted(async()=>{
+onMounted(async () => {
     loading.value = true
     await productStore.list(PAYLOAD_ALL)
     loading.value = false
@@ -16,7 +16,7 @@ onMounted(async()=>{
 <template>
     <div class="container">
         <div class="product-item" v-for="item in productStore.getProduct.data">
-            <img :src="item.image_url" alt="">
+            <img :src="item.image_url" alt="" loading="lazy" />
             <div>{{ item.name }}</div>
             <div>{{ item.price }}</div>
         </div>
@@ -24,12 +24,12 @@ onMounted(async()=>{
 </template>
 
 <style lang="scss" scoped>
-.container{
+.container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);;
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    .product-item{
-        img{
+    .product-item {
+        img {
             width: 100%;
             height: auto;
         }

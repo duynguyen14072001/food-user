@@ -76,15 +76,6 @@ export const partition = (arr: any[], fn: any) =>
         [[], []]
     )
 
-export const convertToSlug = (str: string) => {
-    return str
-        .toLowerCase()
-        .trim()
-        .replace(/\s\s+/g, ' ')
-        .replace(/ /g, '-')
-        .replace(/[^\w-]+/g, '')
-}
-
 export const formatBytes = (bytes: number = 0, decimals = 2, indexUnit = 2) => {
     const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 

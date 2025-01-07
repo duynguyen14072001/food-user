@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { getToken } from './helpers'
 import LayoutVue from './components/common/LayoutVue.vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const isLogin = ref(!!getToken())
-watch(
-    () => route.fullPath,
-    () => (isLogin.value = !!getToken())
-)
 </script>
 
 <template>
     <a-config-provider :autoInsertSpaceInButton="false">
-        <LayoutVue v-if="isLogin">
+        <LayoutVue v-if="route.name !== 'login'">
             <router-view />
         </LayoutVue>
         <template v-else>
