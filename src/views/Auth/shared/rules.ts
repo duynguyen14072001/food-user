@@ -36,6 +36,68 @@ export const ruleLogin = {
     ],
 }
 
+export const ruleSignup = {
+    mail_address: [
+        {
+            required: true,
+            message: t('validation.required', [t('mail_address')]),
+        },
+        {
+            max: MAX_STRING,
+            message: t('validation.max.string', [t('mail_address'), MAX_STRING]),
+        },
+        {
+            validator: async (_: any, value: any) => {
+                if (value && value.length <= MAX_STRING) {
+                    return validateEmail(_, value, 'mail_address')
+                }
+            },
+        },
+    ],
+    name: [
+        {
+            required: true,
+            message: t('validation.required', [t('name')]),
+        },
+        {
+            max: MAX_STRING,
+            message: t('validation.max.string', [t('name'), MAX_STRING]),
+        },
+        {
+            min: MIN_STRING,
+            message: t('validation.min.string', [t('name'), MIN_STRING]),
+        },
+    ],
+    password: [
+        {
+            required: true,
+            message: t('validation.required', [t('password')]),
+        },
+        {
+            max: MAX_STRING,
+            message: t('validation.max.string', [t('password'), MAX_STRING]),
+        },
+        {
+            min: MIN_STRING,
+            message: t('validation.min.string', [t('password'), MIN_STRING]),
+        },
+    ],
+    phone_number: [
+        {
+            required: true,
+            message: t('validation.required', [t('phone_number')]),
+        },
+        {
+            max: MAX_STRING,
+            message: t('validation.max.string', [t('phone_number'), MAX_STRING]),
+        },
+        {
+            min: MIN_STRING,
+            message: t('validation.min.string', [t('phone_number'), MIN_STRING]),
+        },
+    ],
+}
+
 export const getChangePasswordRule: any = (ruleForm: any) => ({
     old_password: [
         {

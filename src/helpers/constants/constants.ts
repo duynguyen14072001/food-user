@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import type { PaginateParams, ParamsList } from '@/interface'
 
 export const PAGE_FIRST = 1
-export const PER_PAGE = 40
+export const PER_PAGE = 4
 export const MAX_STRING = 255
 export const MIN_STRING = 8
 export const MIN_NUMBER = 1

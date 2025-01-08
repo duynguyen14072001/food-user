@@ -21,6 +21,14 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    const signup = async (payload: any | {}) => {
+        try {
+            return await API.signup(payload)
+        } catch (error: any) {
+            return error
+        }
+    }
+
     const logout = async () => {
         try {
             localStorage.clear()
@@ -80,6 +88,7 @@ export const useAuthStore = defineStore('auth', () => {
         login,
         logout,
         getMe,
+        signup,
         changePassword,
         forgotPassword,
         resetPassword,

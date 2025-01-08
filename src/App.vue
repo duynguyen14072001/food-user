@@ -3,11 +3,12 @@ import LayoutVue from './components/common/LayoutVue.vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
+const routeNoLayout = ['login', 'signup']
 </script>
 
 <template>
     <a-config-provider :autoInsertSpaceInButton="false">
-        <LayoutVue v-if="route.name !== 'login'">
+        <LayoutVue v-if="!routeNoLayout.includes(route.name as string)">
             <router-view />
         </LayoutVue>
         <template v-else>

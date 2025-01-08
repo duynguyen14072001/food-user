@@ -22,7 +22,8 @@ import { AppFooterVue, AppHeaderVue } from '.'
 
     .ant-layout-content {
         .main {
-            min-height: calc(100vh - 100px);
+            min-height: calc(100vh - 184px);
+            margin: 130px 0 30px;
         }
     }
 }

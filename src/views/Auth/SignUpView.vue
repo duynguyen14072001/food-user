@@ -1,26 +1,26 @@
 <script lang="ts" setup>
 import { notify, STATUS_CODE_SUCCESS, trim } from '@/helpers'
-import type { LoginDto } from '@/interface'
+import type { SignupDto } from '@/interface'
 import { reactive } from 'vue'
 import { useI18n } from 'vue3-i18n'
-import { INITIAL_LOGIN, ruleLogin } from './shared'
+import { INITIAL_SIGNUP, ruleSignup } from './shared'
 import { useAuthStore } from '@/stores'
 import { useRouter } from 'vue-router'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
-const formState = reactive<LoginDto>(INITIAL_LOGIN)
+const formState = reactive<SignupDto>(INITIAL_SIGNUP)
 const router = useRouter()
 
 const onFinishFailed = (errorInfo: any) => console.error('Failed:', errorInfo)
 
 const onFinish = async (values: any) => {
-    const { status_code, message } = await authStore.login({ ...values })
+    const { status_code, message } = await authStore.signup({ ...values })
     if (status_code !== STATUS_CODE_SUCCESS) {
         return notify(t('auth_failed'), '', 'error')
     }
-    notify(message, t('login_success'), 'success')
-    router.push({ name: 'home' })
+    notify(message, t('signup_success'), 'success')
+    router.push({ name: 'login' })
 }
 </script>
 
@@ -33,20 +33,33 @@ const onFinish = async (values: any) => {
             autocomplete="off"
             ref="ruleFormRef"
             :model="formState"
-            :rules="ruleLogin"
+            :rules="ruleSignup"
             :colon="false"
             @finish="onFinish"
             @finishFailed="onFinishFailed"
         >
-            <a-form-item name="mail_address" :label="t('auth.login.label.mail_address')">
+            <a-form-item name="mail_address" :label="t('auth.signup.label.mail_address')">
                 <a-input
                     v-model:value="formState.mail_address"
                     @blur="trim('mail_address', formState)"
                     :placeholder="t('mail_address')"
                 />
             </a-form-item>
-
-            <a-form-item name="password" :label="t('auth.login.label.password')">
+            <a-form-item name="name" :label="t('auth.signup.label.name')">
+                <a-input
+                    v-model:value="formState.name"
+                    @blur="trim('name', formState)"
+                    :placeholder="t('name')"
+                />
+            </a-form-item>
+            <a-form-item name="phone_number" :label="t('auth.signup.label.phone_number')">
+                <a-input
+                    v-model:value="formState.phone_number"
+                    @blur="trim('phone_number', formState)"
+                    :placeholder="t('phone_number')"
+                />
+            </a-form-item>
+            <a-form-item name="password" :label="t('auth.signup.label.password')">
                 <a-input-password
                     v-model:value="formState.password"
                     autocomplete="on"
@@ -55,13 +68,10 @@ const onFinish = async (values: any) => {
                 />
             </a-form-item>
             <a-button type="primary" html-type="submit">
-                {{ t('login') }}
+                {{ t('signup') }}
             </a-button>
-            <router-link class="forgot-password" to="/forgot-password">
-                {{ t('forgot_password') }}
-            </router-link>
-            <router-link class="forgot-password" to="/signup">
-                {{ t('no_account') }}
+            <router-link class="login" to="/login">
+                {{ t('already_account') }}
             </router-link>
         </a-form>
     </section>
@@ -90,7 +100,7 @@ const onFinish = async (values: any) => {
         .ant-btn {
             width: 100%;
         }
-        .forgot-password {
+        .login {
             margin-top: 10px;
             display: block;
             width: 100%;

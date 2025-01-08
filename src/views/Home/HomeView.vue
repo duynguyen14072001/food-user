@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PAYLOAD_ALL } from '@/helpers'
+import { INITIAL_QUERY } from '@/helpers'
 import { useProductStore } from '@/stores'
 import { onMounted, ref } from 'vue'
 
@@ -8,7 +8,7 @@ const loading = ref()
 
 onMounted(async () => {
     loading.value = true
-    await productStore.list(PAYLOAD_ALL)
+    await productStore.list(INITIAL_QUERY)
     loading.value = false
 })
 </script>
@@ -25,8 +25,10 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .container {
+    padding: 0 100px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 20px;
     .product-item {
         img {

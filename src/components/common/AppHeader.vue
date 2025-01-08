@@ -27,6 +27,10 @@ const { t } = useI18n()
 
 <style scoped lang="scss">
 .header {
+    background-color: var(--vt-c-gray-4);
+    color: var(--vt-c-text-header);
+    position: fixed;
+    width: 100%;
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;

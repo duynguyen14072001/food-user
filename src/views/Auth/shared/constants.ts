@@ -3,6 +3,13 @@ export const INITIAL_LOGIN = {
     password: '',
 }
 
+export const INITIAL_SIGNUP = {
+    mail_address: '',
+    password: '',
+    phone_number: '',
+    name: '',
+}
+
 export const INITIAL_CHANGE_PASSWORD = {
     old_password: '',
     new_password: '',

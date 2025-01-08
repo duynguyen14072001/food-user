@@ -34,6 +34,12 @@ export const routes: any = [
                 beforeEnter: ifNotAuthenticated,
             },
             {
+                path: 'signup',
+                name: 'signup',
+                component: Page.Signup,
+                beforeEnter: ifNotAuthenticated,
+            },
+            {
                 path: 'change-password',
                 name: 'change-password',
                 component: Page.ChangePassword,

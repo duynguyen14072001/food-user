@@ -1,4 +1,5 @@
 export const Login = () => import('@/views/Auth/LoginView.vue')
+export const Signup = () => import('@/views/Auth/SignUpView.vue')
 export const ChangePassword = () => import('@/views/Auth/ChangePasswordView.vue')
 export const ForgotPassword = () => import('@/views/Auth/ForgotPasswordView.vue')
 export const ResetPassword = () => import('@/views/Auth/ResetPasswordView.vue')

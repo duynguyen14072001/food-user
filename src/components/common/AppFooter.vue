@@ -37,7 +37,7 @@ const { t } = useI18n()
 footer {
     padding: 10px 20px;
     display: flex;
-    color: var(--vt-c-white);
+    color: var(--vt-c-text-footer);
     background-color: var(--vt-c-bg-footer);
     gap: 40px;
 

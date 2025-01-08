@@ -10,6 +10,15 @@ export function login(payload: Record<string, any>) {
     })
 }
 
+export function signup(payload: Record<string, any>) {
+    const url = 'auth/signup'
+    return request<ResponseResult, ResponseResult>({
+        url,
+        method: 'POST',
+        data: payload,
+    })
+}
+
 export function changePassword(payload: Record<string, any>) {
     const url = 'auth/change-password'
     return request<ResponseResult, ResponseResult>({
