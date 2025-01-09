@@ -6,7 +6,7 @@ import * as Imgs from '@/assets/imgs'
 import { useAuthStore } from '@/stores/auth'
 import type { ForgotPasswordDto } from '@/interface'
 import { notify, STATUS_CODE_SUCCESS } from '@/helpers'
-import { INITIAL_FORGOT_PASSWORD, ruleForm } from './shared'
+import { INITIAL_FORGOT_PASSWORD, ruleFormForgotPassword } from './shared'
 
 const { t } = useI18n()
 const router = useRouter()
@@ -52,7 +52,7 @@ const trim = (field: 'mail_address') => {
                 <a-form-item
                     name="mail_address"
                     :label="t('auth.forgot_password.label.mail_address')"
-                    :rules="ruleForm.mail_address"
+                    :rules="ruleFormForgotPassword.mail_address"
                 >
                     <a-input
                         v-model:value="formState.mail_address"
@@ -75,6 +75,4 @@ const trim = (field: 'mail_address') => {
     </section>
 </template>
 
-<style scoped lang="scss">
-@import '@/assets/scss/__auth.scss';
-</style>
+<style scoped lang="scss"></style>

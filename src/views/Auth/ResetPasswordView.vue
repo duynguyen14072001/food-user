@@ -91,6 +91,4 @@ const trim = (field: 'new_password' | 'conf_password') => {
     </section>
 </template>
 
-<style scoped lang="scss">
-@import '@/assets/scss/__auth.scss';
-</style>
+<style scoped lang="scss"></style>
