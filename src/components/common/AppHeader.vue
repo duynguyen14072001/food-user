@@ -2,8 +2,14 @@
 import { ShoppingCartOutlined } from '@ant-design/icons-vue'
 import { useI18n } from 'vue3-i18n'
 import * as Img from '@/assets/imgs'
+import { getToken } from '@/helpers';
 
 const { t } = useI18n()
+
+const handleLogout = ()=>{
+    localStorage.clear()
+    window.location.reload()
+}
 </script>
 
 <template>
@@ -18,9 +24,14 @@ const { t } = useI18n()
             <router-link to="/">{{ t('header.contact') }}</router-link>
         </div>
         <div class="right-header">
-            <router-link to="/login">{{ t('header.login') }}</router-link>
-            <router-link to="/">{{ t('header.signup') }}</router-link>
-            <ShoppingCartOutlined style="font-size: 24px" />
+            <div v-if="!getToken()" class="auth">
+                <router-link to="/login">{{ t('header.login') }}</router-link>
+                <router-link to="/signup">{{ t('header.signup') }}</router-link>
+            </div>
+            <div v-else class="auth">
+                <div class="logout" @click="handleLogout">{{ t('header.logout') }}</div>
+            </div>
+            <ShoppingCartOutlined v-if="getToken()" style="font-size: 24px" />
         </div>
     </div>
 </template>
@@ -32,6 +43,7 @@ const { t } = useI18n()
     position: fixed;
     width: 100%;
     padding: 20px 40px;
+    z-index: 10;
     display: flex;
     justify-content: space-between;
 
@@ -40,8 +52,20 @@ const { t } = useI18n()
         font-size: 18px;
         display: flex;
         align-items: center;
-
         gap: 30px;
+        
+        .auth{
+            display: flex;
+            align-items: center;
+            gap: 30px;
+
+            .logout{
+                cursor: pointer;
+                &:hover{
+                    color: var(--vt-c-main);
+                }
+            }
+        }
     }
 
     .left-header {

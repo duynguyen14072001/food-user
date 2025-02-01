@@ -8,9 +8,7 @@ const routeNoLayout = ['login', 'signup']
 
 <template>
     <a-config-provider :autoInsertSpaceInButton="false">
-        <LayoutVue v-if="!routeNoLayout.includes(route.name as string)">
-            <router-view />
-        </LayoutVue>
+        <LayoutVue v-if="!routeNoLayout.includes(route.name as string)" />
         <template v-else>
             <router-view />
         </template>

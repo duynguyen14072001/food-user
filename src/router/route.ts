@@ -25,7 +25,6 @@ export const routes: any = [
                 path: '',
                 name: 'home',
                 component: Page.Home,
-                beforeEnter: ifNotAuthenticated,
             },
             {
                 path: 'login',

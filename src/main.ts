@@ -6,7 +6,7 @@ import router from './router'
 import Antd from 'ant-design-vue'
 import './assets/scss/main.scss'
 import 'ant-design-vue/dist/reset.css'
-import { ModalDelete, ModalVue } from './components/common'
+import { ModalDelete, ModalVue, ProductItem } from './components/common'
 
 const app = createApp(App)
 
@@ -17,4 +17,5 @@ app.use(router)
 
 app.component('modal-vue', ModalVue)
 app.component('modal-delete', ModalDelete)
+app.component('product-item', ProductItem)
 app.mount('#app')

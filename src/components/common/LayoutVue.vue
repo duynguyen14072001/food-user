@@ -6,7 +6,9 @@ import { AppFooterVue, AppHeaderVue } from '.'
     <a-layout>
         <a-layout-content>
             <AppHeaderVue />
-            <div class="main"><router-view /></div>
+            <div class="main">
+                <router-view />
+            </div>
             <AppFooterVue />
         </a-layout-content>
     </a-layout>
@@ -15,7 +17,6 @@ import { AppFooterVue, AppHeaderVue } from '.'
 <style lang="scss" scoped>
 .ant-layout {
     display: flex;
-    flex-direction: row;
     .ant-menu {
         max-width: 200px;
     }
@@ -23,7 +24,10 @@ import { AppFooterVue, AppHeaderVue } from '.'
     .ant-layout-content {
         .main {
             min-height: calc(100vh - 184px);
-            margin: 130px 0 30px;
+            margin: 100px 0 0;
+            padding: 20px 60px 60px;
+            max-width: 100vw;
+            background-color: var(--vt-c-white);
         }
     }
 }

@@ -6,4 +6,5 @@ Food`,
     contact: 'Liên hệ',
     login: 'Đăng nhập',
     signup: 'Đăng ký',
+    logout: 'Đăng xuất',
 }

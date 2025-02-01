@@ -4,6 +4,7 @@ import validation from './validation'
 import products from './products'
 import header from './header'
 import footer from './footer'
+import home from './home'
 
 export const vi = {
     ...base,
@@ -12,4 +13,5 @@ export const vi = {
     products,
     header,
     footer,
+    home,
 }

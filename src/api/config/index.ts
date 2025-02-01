@@ -32,10 +32,6 @@ instance.interceptors.response.use(
         return response.data
     },
     function (error) {
-        if (error?.response?.status === STATUS_CODE_UNAUTHORIZED || error.code === 'ERR_NETWORK') {
-            localStorage.clear()
-            return router.push({ name: 'login' })
-        }
         if (error?.response?.data) {
             return Promise.reject(error?.response?.data)
         }
