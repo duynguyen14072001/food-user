@@ -27,6 +27,32 @@ export const routes: any = [
                 component: Page.Home,
             },
             {
+                path: 'product',
+                children: [
+                    {
+                        path: '',
+                        name: 'product-list',
+                        component: Page.ProductList,
+                    },
+                    {
+                        path: ':slug',
+                        name: 'product-detail',
+                        component: Page.ProductDetail,
+                    },
+                ],
+            },
+            {
+                path: 'cart',
+                children: [
+                    {
+                        path: '',
+                        name: 'cart-list',
+                        component: Page.CartList,
+                        beforeEnter: ifAuthenticated,
+                    },
+                ],
+            },
+            {
                 path: 'login',
                 name: 'login',
                 component: Page.Login,
@@ -58,7 +84,6 @@ export const routes: any = [
                 path: ':pathMatch(.*)*',
                 component: Page.NotFound,
                 name: 'page-not-found',
-                beforeEnter: ifAuthenticated,
             },
         ],
     },

@@ -31,7 +31,7 @@ const emits = defineEmits(['onDelete'])
 <style lang="scss" scoped>
 .container {
     cursor: pointer;
-    width: 250px;
+    width: 100%;
     height: fit-content;
     border-radius: 20px;
 

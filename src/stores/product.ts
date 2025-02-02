@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import * as API from '@/api/product'
-import { INITIAL_QUERY } from '@/helpers'
 import type { Product, ProductResult, ParamsList } from '@/interface'
 
 export const useProductStore = defineStore('product', () => {
@@ -19,41 +18,11 @@ export const useProductStore = defineStore('product', () => {
         }
     }
 
-    const detail = async (id: number) => {
+    const detail = async (slug: string) => {
         try {
-            const { result, status_code } = await API.detail(id)
+            const { result, status_code } = await API.detail(slug)
             productDetail.value = result
             return { ...productDetail.value, status_code }
-        } catch (error: any) {
-            return error
-        }
-    }
-
-    const create = async (payload: Record<string, any>) => {
-        try {
-            const result = await API.create(payload)
-            await list({ ...INITIAL_QUERY })
-            return result
-        } catch (error: any) {
-            return error
-        }
-    }
-
-    const update = async (payload: Record<string, any>, id: number) => {
-        try {
-            const result = await API.update(payload, id)
-            await list(query.value)
-            return result
-        } catch (error: any) {
-            return error
-        }
-    }
-
-    const remove = async (id: number) => {
-        try {
-            const result = await API.remove(id)
-            await list({ ...INITIAL_QUERY })
-            return result
         } catch (error: any) {
             return error
         }
@@ -67,8 +36,5 @@ export const useProductStore = defineStore('product', () => {
         getProductDetail,
         list,
         detail,
-        update,
-        create,
-        remove,
     }
 })

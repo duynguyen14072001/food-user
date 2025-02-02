@@ -2718,6 +2718,11 @@ vue-types@^3.0.0:
   dependencies:
     is-plain-object "3.0.1"
 
+vue3-carousel@^0.3.3:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/vue3-carousel/-/vue3-carousel-0.3.4.tgz#8ef6d6b592385b7f8e97fcd508a3f4db29a2391e"
+  integrity sha512-jImUDbQa/9pELxUQdkflUPXL94V+iQZaOPUxWDBKSffCuxhYcV3sDM40pxoiYxUxXoNCDLUF4u9Ug6Xjdt4nkA==
+
 vue3-i18n@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/vue3-i18n/-/vue3-i18n-1.1.5.tgz#e00839e05b176bb2527f00fcd1bcdd82e1416fa9"

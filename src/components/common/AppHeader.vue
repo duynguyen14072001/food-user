@@ -2,11 +2,11 @@
 import { ShoppingCartOutlined } from '@ant-design/icons-vue'
 import { useI18n } from 'vue3-i18n'
 import * as Img from '@/assets/imgs'
-import { getToken } from '@/helpers';
+import { getToken } from '@/helpers'
 
 const { t } = useI18n()
 
-const handleLogout = ()=>{
+const handleLogout = () => {
     localStorage.clear()
     window.location.reload()
 }
@@ -20,7 +20,7 @@ const handleLogout = ()=>{
                 <span class="logo-text">{{ t('header.logo') }}</span>
             </router-link>
             <router-link to="/">{{ t('header.home') }}</router-link>
-            <router-link to="/">{{ t('header.menu') }}</router-link>
+            <router-link to="/product">{{ t('header.menu') }}</router-link>
             <router-link to="/">{{ t('header.contact') }}</router-link>
         </div>
         <div class="right-header">
@@ -53,15 +53,15 @@ const handleLogout = ()=>{
         display: flex;
         align-items: center;
         gap: 30px;
-        
-        .auth{
+
+        .auth {
             display: flex;
             align-items: center;
             gap: 30px;
 
-            .logout{
+            .logout {
                 cursor: pointer;
-                &:hover{
+                &:hover {
                     color: var(--vt-c-main);
                 }
             }

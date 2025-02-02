@@ -10,36 +10,10 @@ export const list = (payload: Record<string, any>) => {
     })
 }
 
-export const detail = (id: number) => {
-    const url = `/products/${id}`
+export const detail = (slug: string) => {
+    const url = `/products/${slug}`
     return request<ResponseResult, ResponseResult>({
         url,
         method: 'GET',
-    })
-}
-
-export const create = (payload: Record<string, any>) => {
-    const url = '/products'
-    return request<ResponseResult, ResponseResult>({
-        url,
-        method: 'POST',
-        data: payload,
-    })
-}
-
-export const update = (payload: Record<string, any>, id: number) => {
-    const url = `/products/${id}`
-    return request<ResponseResult, ResponseResult>({
-        url,
-        method: 'PATCH',
-        data: payload,
-    })
-}
-
-export const remove = (id: number) => {
-    const url = `/products/${id}`
-    return request<ResponseResult, ResponseResult>({
-        url,
-        method: 'DELETE',
     })
 }

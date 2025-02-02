@@ -6,6 +6,7 @@ import router from './router'
 import Antd from 'ant-design-vue'
 import './assets/scss/main.scss'
 import 'ant-design-vue/dist/reset.css'
+import 'vue3-carousel/dist/carousel.css'
 import { ModalDelete, ModalVue, ProductItem } from './components/common'
 
 const app = createApp(App)

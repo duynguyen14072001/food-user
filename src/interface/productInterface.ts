@@ -4,6 +4,7 @@ export interface Product {
     id: number
     name: string
     image_url: string
+    image_urls: string[]
     description: string
     price: number
     created_at: string
@@ -17,6 +18,7 @@ export interface FormStateProduct {
     id?: number
     name: string
     image_url: string
+    image_urls: string[]
     description: string
     price: number | null
     category_id: number | string[]

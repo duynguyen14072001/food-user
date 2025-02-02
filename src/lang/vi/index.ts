@@ -5,6 +5,7 @@ import products from './products'
 import header from './header'
 import footer from './footer'
 import home from './home'
+import cart from './cart'
 
 export const vi = {
     ...base,
@@ -14,4 +15,5 @@ export const vi = {
     header,
     footer,
     home,
+    cart,
 }

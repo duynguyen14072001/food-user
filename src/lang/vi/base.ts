@@ -21,6 +21,7 @@ export default {
         create: 'Tạo mới',
         cancel: 'Hủy',
         submit: 'OK',
+        remove: 'Xóa',
     },
     modal: {
         delete: {

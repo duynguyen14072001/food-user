@@ -24,51 +24,53 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="banners">
-        <a-carousel arrows :dots="false" :autoplay="true">
-            <template #prevArrow>
-                <div class="custom-slick-arrow">
-                    <LeftOutlined style="font-size: 30px; color: red" />
+    <a-spin tip="Loading..." :spinning="loading">
+        <div class="banners">
+            <a-carousel arrows :dots="false" :autoplay="true">
+                <template #prevArrow>
+                    <div class="custom-slick-arrow">
+                        <LeftOutlined style="font-size: 30px; color: red" />
+                    </div>
+                </template>
+                <template #nextArrow>
+                    <div class="custom-slick-arrow">
+                        <RightOutlined style="font-size: 30px; color: red" />
+                    </div>
+                </template>
+                <div class="banner-item" v-for="item in bannerStore.getBanners.data">
+                    <img :src="item.image_url" alt="" loading="lazy" />
                 </div>
-            </template>
-            <template #nextArrow>
-                <div class="custom-slick-arrow">
-                    <RightOutlined style="font-size: 30px; color: red" />
-                </div>
-            </template>
-            <div class="banner-item" v-for="item in bannerStore.getBanners.data">
-                <img :src="item.image_url" alt="" loading="lazy" />
-            </div>
-        </a-carousel>
-    </div>
-
-    <div class="recommends">
-        <h1 class="title">
-            {{ t('home.recommend.title') }}
-        </h1>
-        <div class="content">
-            <product-item
-                v-for="(item, index) in recommendStore.getRecommends.data"
-                :item="item.product"
-                :key="index"
-            />
+            </a-carousel>
         </div>
-    </div>
 
-    <div class="faqs">
-        <h1 class="title">
-            {{ t('home.faq.title') }}
-        </h1>
-        <a-collapse expand-icon-position="end">
-            <a-collapse-panel
-                v-for="(item, index) in faqStore.getFaqs.data"
-                :key="index"
-                :header="item.question"
-            >
-                <p>{{ item.answer }}</p>
-            </a-collapse-panel>
-        </a-collapse>
-    </div>
+        <div class="recommends">
+            <h1 class="title">
+                {{ t('home.recommend.title') }}
+            </h1>
+            <div class="content">
+                <product-item
+                    v-for="(item, index) in recommendStore.getRecommends.data"
+                    :item="item.product"
+                    :key="index"
+                />
+            </div>
+        </div>
+
+        <div class="faqs">
+            <h1 class="title">
+                {{ t('home.faq.title') }}
+            </h1>
+            <a-collapse expand-icon-position="end">
+                <a-collapse-panel
+                    v-for="(item, index) in faqStore.getFaqs.data"
+                    :key="index"
+                    :header="item.question"
+                >
+                    <p>{{ item.answer }}</p>
+                </a-collapse-panel>
+            </a-collapse>
+        </div>
+    </a-spin>
 </template>
 
 <style lang="scss" scoped>
@@ -100,7 +102,8 @@ onMounted(async () => {
         margin-bottom: 30px;
     }
     .content {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
         flex-wrap: wrap;
         gap: 20px;
     }
@@ -130,8 +133,8 @@ onMounted(async () => {
                 font-size: 18px;
                 align-items: center;
 
-                .ant-collapse-expand-icon{
-                    .anticon{
+                .ant-collapse-expand-icon {
+                    .anticon {
                         font-size: 20px;
                     }
                 }
@@ -143,7 +146,7 @@ onMounted(async () => {
                 background-color: var(--vt-c-gray-v6);
                 font-size: 16px;
 
-                .ant-collapse-content-box{
+                .ant-collapse-content-box {
                     padding: 20px 40px 40px;
                 }
             }
