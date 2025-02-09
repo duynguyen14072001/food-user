@@ -20,7 +20,12 @@ export const columns: ColumnTable[] = [
     {
         title: t('cart.column.price'),
         key: 'price',
-        customRender: ({ record }: any) => <span>{record.product.price}</span>,
+        customRender: ({ record }: any) => (
+            <span>
+                {record.product.price}
+                {t('unit_price')}
+            </span>
+        ),
     },
     {
         title: t('cart.column.quantity'),

@@ -9,6 +9,7 @@ export default {
     phone_number: 'Số điện thoại',
     password: 'Mật khẩu',
     name: 'Tên',
+    unit_price: '₫',
     login_success: 'Đăng nhập thành công',
     signup_success: 'Đăng ký thành công',
     create_success: 'Tạo mới thành công',

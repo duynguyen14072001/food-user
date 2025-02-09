@@ -1,18 +1,18 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import * as API from '@/api/cart'
+import * as API from '@/api/order'
 import { INITIAL_QUERY } from '@/helpers'
-import type { CartResult, ParamsList } from '@/interface'
+import type { OrderResult, ParamsList } from '@/interface'
 
-export const useCartStore = defineStore('cart', () => {
-    const carts = ref({} as CartResult)
+export const useOrderStore = defineStore('order', () => {
+    const orders = ref({} as OrderResult)
     const query = ref<ParamsList>({})
 
     const list = async (payload: Record<string, any>) => {
         try {
             const data = await API.list(payload)
             query.value = payload
-            return (carts.value = data.result)
+            return (orders.value = data.result)
         } catch (error: any) {
             return error
         }
@@ -38,23 +38,12 @@ export const useCartStore = defineStore('cart', () => {
         }
     }
 
-    const remove = async (id: number | number[]) => {
-        try {
-            const result = await API.remove(id)
-            await list({ ...INITIAL_QUERY })
-            return result
-        } catch (error: any) {
-            return error
-        }
-    }
-
-    const getCart = computed(() => carts.value)
+    const getOrder = computed(() => orders.value)
 
     return {
-        getCart,
+        getOrder,
         list,
         update,
         create,
-        remove,
     }
 })

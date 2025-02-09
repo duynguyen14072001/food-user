@@ -4,6 +4,7 @@ import { useBannerStore } from './banner'
 import { useRecommendStore } from './recommend'
 import { useFaqStore } from './faq'
 import { useCartStore } from './cart'
+import { useOrderStore } from './order'
 
 export {
     useAuthStore,
@@ -12,4 +13,5 @@ export {
     useRecommendStore,
     useFaqStore,
     useCartStore,
+    useOrderStore,
 }

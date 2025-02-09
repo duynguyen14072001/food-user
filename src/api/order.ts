@@ -2,7 +2,7 @@ import request from '@/api/config'
 import type { ResponseResult, ResponseList } from '@/interface'
 
 export const list = (payload: Record<string, any>) => {
-    const url = '/carts'
+    const url = '/orders'
     return request<ResponseList, ResponseList>({
         url,
         method: 'GET',
@@ -11,7 +11,7 @@ export const list = (payload: Record<string, any>) => {
 }
 
 export const create = (payload: Record<string, any>) => {
-    const url = '/carts'
+    const url = '/orders'
     return request<ResponseResult, ResponseResult>({
         url,
         method: 'POST',
@@ -20,19 +20,10 @@ export const create = (payload: Record<string, any>) => {
 }
 
 export const update = (payload: Record<string, any>, id: number) => {
-    const url = `/carts/${id}`
+    const url = `/orders/${id}`
     return request<ResponseResult, ResponseResult>({
         url,
         method: 'PATCH',
         data: payload,
-    })
-}
-
-export const remove = (ids: number | number[]) => {
-    const url = `/carts`
-    return request<ResponseResult, ResponseResult>({
-        url,
-        method: 'DELETE',
-        data: ids,
     })
 }
