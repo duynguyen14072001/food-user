@@ -6,6 +6,7 @@ import { useI18n } from 'vue3-i18n'
 import { INITIAL_LOGIN, ruleLogin } from './shared'
 import { useAuthStore } from '@/stores'
 import { useRouter } from 'vue-router'
+import * as Img from '@/assets/imgs'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
@@ -26,6 +27,12 @@ const onFinish = async (values: any) => {
 
 <template>
     <section className="form-login">
+        <div class="logo">
+            <img :src="Img.Logo" alt="Logo" />
+        </div>
+        <div class="title">
+            {{ t('login') }}
+        </div>
         <a-form
             name="basic"
             :label-col="{ span: 8 }"
@@ -78,6 +85,20 @@ const onFinish = async (values: any) => {
     padding: 30px 65px 34px;
     background-color: var(--vt-c-white);
     box-shadow: 0 0 4px #adadad66;
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        img {
+            width: 100px;
+        }
+    }
+
+    .title {
+        font-size: 30px;
+        text-align: center;
+        margin: 0 0 30px;
+    }
 
     .ant-form {
         .ant-form-item {

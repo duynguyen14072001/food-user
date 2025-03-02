@@ -5,6 +5,7 @@ import { useRecommendStore } from './recommend'
 import { useFaqStore } from './faq'
 import { useCartStore } from './cart'
 import { useOrderStore } from './order'
+import { useReviewStore } from './review'
 
 export {
     useAuthStore,
@@ -14,4 +15,5 @@ export {
     useFaqStore,
     useCartStore,
     useOrderStore,
+    useReviewStore,
 }

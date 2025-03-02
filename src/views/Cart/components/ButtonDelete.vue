@@ -6,7 +6,7 @@ const props = defineProps(['id'])
 const { t } = useI18n()
 const cartStore = useCartStore()
 
-const handleRemove = async () => await cartStore.remove(props.id)
+const handleRemove = async () => await cartStore.remove([props.id])
 </script>
 
 <template>

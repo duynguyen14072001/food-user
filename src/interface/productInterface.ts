@@ -8,18 +8,9 @@ export interface Product {
     description: string
     price: number
     created_at: string
+    category_names: string[]
 }
 
 export interface ProductResult extends Result {
     data?: Product[]
-}
-
-export interface FormStateProduct {
-    id?: number
-    name: string
-    image_url: string
-    image_urls: string[]
-    description: string
-    price: number | null
-    category_id: number | string[]
 }

@@ -6,7 +6,7 @@ const emits = defineEmits(['onDelete'])
 </script>
 
 <template>
-    <div class="container">
+    <router-link :to="{ name: 'product-detail', params: { slug: item.slug } }" class="container">
         <img class="image" :src="item.image_url" alt="" />
         <div class="category">
             <div v-for="(item, index) in item.productCategories" :key="index" class="category-item">
@@ -25,7 +25,7 @@ const emits = defineEmits(['onDelete'])
                 @click="emits('onDelete')"
             />
         </div>
-    </div>
+    </router-link>
 </template>
 
 <style lang="scss" scoped>

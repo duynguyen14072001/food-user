@@ -31,7 +31,9 @@ const handleLogout = () => {
             <div v-else class="auth">
                 <div class="logout" @click="handleLogout">{{ t('header.logout') }}</div>
             </div>
-            <ShoppingCartOutlined v-if="getToken()" style="font-size: 24px" />
+            <router-link to="/cart">
+                <ShoppingCartOutlined v-if="getToken()" style="font-size: 24px" />
+            </router-link>
         </div>
     </div>
 </template>
