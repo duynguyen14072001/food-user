@@ -17,11 +17,9 @@ const handleLogout = () => {
         <div class="left-header">
             <router-link to="/" class="logo">
                 <img :src="Img.Logo" alt="Logo" />
-                <span class="logo-text">{{ t('header.logo') }}</span>
             </router-link>
             <router-link to="/">{{ t('header.home') }}</router-link>
             <router-link to="/product">{{ t('header.menu') }}</router-link>
-            <router-link to="/">{{ t('header.contact') }}</router-link>
         </div>
         <div class="right-header">
             <div v-if="!getToken()" class="auth">
@@ -77,11 +75,6 @@ const handleLogout = () => {
             img {
                 width: 60px;
                 height: 60px;
-            }
-
-            .logo-text {
-                font-size: 10px;
-                white-space: break-spaces;
             }
         }
     }

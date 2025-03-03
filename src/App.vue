@@ -3,7 +3,7 @@ import LayoutVue from './components/common/LayoutVue.vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const routeNoLayout = ['login', 'signup']
+const routeNoLayout = ['login', 'signup', 'forgot-password', 'reset-password']
 </script>
 
 <template>

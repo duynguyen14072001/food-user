@@ -71,14 +71,22 @@ export const routes: any = [
                 beforeEnter: ifAuthenticated,
             },
             {
+                path: 'profile',
+                name: 'profile',
+                component: Page.ProfileView,
+                beforeEnter: ifAuthenticated,
+            },
+            {
                 path: 'forgot-password',
                 name: 'forgot-password',
                 component: Page.ForgotPassword,
+                beforeEnter: ifNotAuthenticated,
             },
             {
                 path: 'reset-password',
                 name: 'reset-password',
                 component: Page.ResetPassword,
+                beforeEnter: ifNotAuthenticated,
             },
             {
                 path: ':pathMatch(.*)*',

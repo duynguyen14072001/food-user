@@ -42,9 +42,9 @@ const trim = (field: 'new_password' | 'conf_password') => {
 </script>
 
 <template>
-    <section className="full-page auth-password">
+    <section className="form-reset">
         <div className="content">
-            <h4 className="form-title">{{ t('auth.reset_password.title') }}</h4>
+            <h4 className="form-title">{{ t('auth.reset_pass.title') }}</h4>
             <a-form
                 name="basic"
                 :label-col="{ span: 8 }"
@@ -56,10 +56,7 @@ const trim = (field: 'new_password' | 'conf_password') => {
                 @finish="onFinish"
                 @finishFailed="onFinishFailed"
             >
-                <a-form-item
-                    name="new_password"
-                    :label="t('auth.reset_password.label.new_password')"
-                >
+                <a-form-item name="new_password" :label="t('auth.reset_pass.label.new_password')">
                     <a-input-password
                         v-model:value="formState.new_password"
                         @blur="trim('new_password')"
@@ -67,10 +64,7 @@ const trim = (field: 'new_password' | 'conf_password') => {
                     />
                 </a-form-item>
 
-                <a-form-item
-                    name="conf_password"
-                    :label="t('auth.reset_password.label.conf_password')"
-                >
+                <a-form-item name="conf_password" :label="t('auth.reset_pass.label.conf_password')">
                     <a-input-password
                         v-model:value="formState.conf_password"
                         @blur="trim('conf_password')"
@@ -78,12 +72,11 @@ const trim = (field: 'new_password' | 'conf_password') => {
                     />
                 </a-form-item>
                 <div class="box-button">
-                    <a class="a-redirect" href="/login">
-                        <img :src="Imgs.IconArrowRight2" alt="" />
-                        {{ t('login') }}
-                    </a>
+                    <router-link class="a-redirect" to="/login">
+                        {{ t('auth.reset_pass.back_login') }}
+                    </router-link>
                     <a-button type="primary" html-type="submit" :loading="loading">
-                        {{ t('auth.reset_password.btn_sbm') }}
+                        {{ t('auth.reset_pass.btn_sbm') }}
                     </a-button>
                 </div>
             </a-form>
@@ -91,4 +84,31 @@ const trim = (field: 'new_password' | 'conf_password') => {
     </section>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.form-reset {
+    max-width: 600px;
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px 65px 34px;
+    background-color: var(--vt-c-white);
+    box-shadow: 0 0 4px #adadad66;
+
+    .ant-form {
+        &:deep(.ant-form-item) {
+            .ant-row {
+                .ant-col {
+                    text-align: left;
+                }
+            }
+        }
+        .box-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+}
+</style>

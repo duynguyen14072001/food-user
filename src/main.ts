@@ -8,6 +8,7 @@ import './assets/scss/main.scss'
 import 'ant-design-vue/dist/reset.css'
 import 'vue3-carousel/dist/carousel.css'
 import { ModalDelete, ModalVue, ProductItem } from './components/common'
+import ImageSingle from './components/common/Image/ImageSingle.vue'
 
 const app = createApp(App)
 
@@ -19,4 +20,5 @@ app.use(router)
 app.component('modal-vue', ModalVue)
 app.component('modal-delete', ModalDelete)
 app.component('product-item', ProductItem)
+app.component('image-single', ImageSingle)
 app.mount('#app')

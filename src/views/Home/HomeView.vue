@@ -26,15 +26,15 @@ onMounted(async () => {
 <template>
     <a-spin tip="Loading..." :spinning="loading">
         <div class="banners">
-            <a-carousel arrows :dots="false" :autoplay="true">
+            <a-carousel arrows :dots="true" :autoplay="false">
                 <template #prevArrow>
                     <div class="custom-slick-arrow">
-                        <LeftOutlined style="font-size: 30px; color: red" />
+                        <LeftOutlined style="font-size: 20px; color: #7c7c7c" />
                     </div>
                 </template>
                 <template #nextArrow>
                     <div class="custom-slick-arrow">
-                        <RightOutlined style="font-size: 30px; color: red" />
+                        <RightOutlined style="font-size: 20px; color: #7c7c7c" />
                     </div>
                 </template>
                 <div class="banner-item" v-for="item in bannerStore.getBanners.data">
@@ -77,20 +77,52 @@ onMounted(async () => {
 .ant-carousel {
     &:deep(.slick-slider) {
         .custom-slick-arrow {
-            z-index: 10;
+            z-index: 1;
             margin-top: 0;
+            background-color: var(--vt-c-white);
+            border-radius: 100%;
+            height: 30px;
+            width: 30px;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
         }
         .slick-prev {
-            left: 5px;
+            left: 0;
+            transform: translateX(-50%);
         }
 
         .slick-next {
-            right: 5px;
+            right: 0;
+            transform: translateX(50%);
         }
         .banner-item {
             height: 500px;
             img {
                 width: 100%;
+            }
+        }
+
+        .slick-dots {
+            bottom: -25px;
+            margin: 0;
+            li {
+                width: 12px;
+                button {
+                    width: 6px;
+                    height: 6px;
+                    background-color: unset;
+                    &::after {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 100%;
+                        background-color: var(--vt-c-black-bold);
+                    }
+                }
+            }
+
+            .slick-active {
+                width: 12px;
             }
         }
     }
