@@ -6,7 +6,9 @@ export default {
             name: 'Tên',
             mail_address: 'Địa chỉ email',
             phone_number: 'Số điện thoại',
-            password: 'Mật khẩu',
+            old_password: 'Mật khẩu cũ',
+            new_password: 'Mật khẩu mới',
         },
+        btn_sbm: 'Cập nhật',
     },
 }

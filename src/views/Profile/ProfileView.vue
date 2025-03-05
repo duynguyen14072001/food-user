@@ -3,7 +3,7 @@ import type { UserCreateDto } from '@/interface'
 import { useAuthStore } from '@/stores'
 import { onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue3-i18n'
-import { FORM_PROFILE } from './shared'
+import { FORM_PROFILE, rules } from './shared'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
@@ -13,6 +13,14 @@ const formState = reactive<UserCreateDto>({
 })
 
 const handleImg = (e: any) => (formState.image_url = e.value.at(-1).response.result)
+
+const onFinishFailed = (errorInfo: any) => console.error('Failed:', errorInfo)
+
+const onFinish = async () => {
+    loading.value = true
+    await authStore.updateInfo(formState)
+    loading.value = false
+}
 
 onMounted(async () => {
     loading.value = true
@@ -26,16 +34,21 @@ onMounted(async () => {
     <h1>{{ t('profile.title') }}</h1>
     <div class="full-page">
         <a-spin tip="Loading..." :spinning="loading">
-            <a-form>
+            <a-form
+                @finish="onFinish"
+                @finishFailed="onFinishFailed"
+                :model="formState"
+                :rules="rules"
+            >
                 <a-form-item name="image_url" :label="t('profile.form.label.image')">
                     <image-single
-                        type="products"
+                        type="avatars"
                         :img-value="formState.image_url"
                         @change-img="handleImg"
                     />
                 </a-form-item>
                 <a-form-item name="mail_address" :label="t('profile.form.label.mail_address')">
-                    <a-input v-model:value="formState.mail_address"></a-input>
+                    <a-input v-model:value="formState.mail_address" disabled></a-input>
                 </a-form-item>
                 <a-form-item name="name" :label="t('profile.form.label.name')">
                     <a-input v-model:value="formState.name"></a-input>
@@ -43,9 +56,15 @@ onMounted(async () => {
                 <a-form-item name="phone_number" :label="t('profile.form.label.phone_number')">
                     <a-input v-model:value="formState.phone_number"></a-input>
                 </a-form-item>
-                <a-form-item name="password" :label="t('profile.form.label.password')">
-                    <a-input-password v-model:value="formState.password"></a-input-password>
+                <a-form-item name="old_password" :label="t('profile.form.label.old_password')">
+                    <a-input-password v-model:value="formState.old_password"></a-input-password>
                 </a-form-item>
+                <a-form-item name="new_password" :label="t('profile.form.label.new_password')">
+                    <a-input-password v-model:value="formState.new_password"></a-input-password>
+                </a-form-item>
+                <a-button html-type="submit" key="submit" type="primary">
+                    {{ t('profile.form.btn_sbm') }}
+                </a-button>
             </a-form>
         </a-spin>
     </div>

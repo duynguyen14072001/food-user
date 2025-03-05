@@ -3,5 +3,6 @@ export const FORM_PROFILE = {
     mail_address: '',
     phone_number: '',
     image_url: '',
-    password: '',
+    old_password: '',
+    new_password: '',
 }

@@ -38,9 +38,9 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
-    const changePassword = async (payload: any | {}) => {
+    const updateInfo = async (payload: any | {}) => {
         try {
-            return await API.changePassword(payload)
+            return await API.updateInfo(payload)
         } catch (error: any) {
             return error
         }
@@ -89,7 +89,7 @@ export const useAuthStore = defineStore('auth', () => {
         logout,
         getMe,
         signup,
-        changePassword,
+        updateInfo,
         forgotPassword,
         resetPassword,
     }

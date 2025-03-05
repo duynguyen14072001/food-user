@@ -19,8 +19,8 @@ export function signup(payload: Record<string, any>) {
     })
 }
 
-export function changePassword(payload: Record<string, any>) {
-    const url = 'auth/change-password'
+export function updateInfo(payload: Record<string, any>) {
+    const url = 'auth/update-info'
     return request<ResponseResult, ResponseResult>({
         url,
         method: 'PATCH',
