@@ -28,11 +28,10 @@ export const update = (payload: Record<string, any>, id: number) => {
     })
 }
 
-export const remove = (payload: Record<string, any>) => {
-    const url = `/reviews`
+export const remove = (id: number) => {
+    const url = `/reviews/${id}`
     return request<ResponseResult, ResponseResult>({
         url,
         method: 'DELETE',
-        data: payload,
     })
 }

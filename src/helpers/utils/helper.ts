@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { ALL_OPTION, DAY_LIST, PAGE_FIRST } from '..'
+import { ALL_OPTION, PAGE_FIRST } from '..'
 import { formatter } from './helperUI'
 import type { ParamsList } from '@/interface'
 
@@ -8,16 +8,14 @@ export const formatDay = (day: any, format = 'YYYY-MM-DD') => {
     return dayjs(new Date(day)).format(format)
 }
 
+export const formatDate = (day: any, format = 'YYYY-MM-DD') => {
+    if (!day) return ''
+    return dayjs(day).format(format)
+}
+
 export const formatDayJS = (day: any, format = 'YYYY-MM-DD') => {
     if (!day) return ''
     return dayjs(day, format)
-}
-
-export const formatDateJP = (date: Date | string) => {
-    const day = dayjs(date).format('D')
-    const month = dayjs(date).format('M')
-    const dayOfWeek = formatDay(date, 'd')
-    return month + '月' + day + '日' + ` (${DAY_LIST[parseInt(dayOfWeek) + 1]})`
 }
 
 export const formatMoney = (value: string) => {
@@ -62,19 +60,6 @@ export const mapKeyToData = (value: any) => {
         ])
     })
 }
-
-export const getFirstErrorMessage = (errors: Record<string, any>) => {
-    return Object.values(errors).flat().shift() as string
-}
-
-export const partition = (arr: any[], fn: any) =>
-    arr.reduce(
-        (acc, val, i, arr) => {
-            acc[fn(val, i, arr) ? 0 : 1].push(val)
-            return acc
-        },
-        [[], []]
-    )
 
 export const formatBytes = (bytes: number = 0, decimals = 2, indexUnit = 2) => {
     const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']

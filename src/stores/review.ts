@@ -37,10 +37,9 @@ export const useReviewStore = defineStore('review', () => {
         }
     }
 
-    const remove = async (ids: number[]) => {
+    const remove = async (id: number) => {
         try {
-            const result = await API.remove({ ids })
-            await list({ ...INITIAL_QUERY })
+            const result = await API.remove(id)
             return result
         } catch (error: any) {
             return error

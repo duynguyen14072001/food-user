@@ -6,6 +6,13 @@ export interface Review {
     product_id: number
     star_number: number
     comment: string
+    user: any
+    created_at: string
+}
+
+export interface ReviewFormState {
+    star_number: number
+    comment: string
 }
 
 export interface ReviewResult extends Result {

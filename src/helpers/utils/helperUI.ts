@@ -40,28 +40,6 @@ export const trim = (field: string, formState: any) => {
     }
 }
 
-export const trimDynamic = (array: number[] | string[], form: any) => {
-    const [field1, index, field2] = array
-    form[field1][index][field2] = form[field1][index][field2].trim()
-}
-
-export const formatCurrency = (money: string) => {
-    const result = unRoundFixed(money)
-    return String(result).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-}
-
-export const trimAndFormatCurrency = (field: string | number, formState: any) => {
-    if (formState[field]) {
-        formState[field] = formState[field].trim()
-        formState[field] = formatCurrency(formState[field])
-    }
-}
-
-export const unRoundFixed = (num: string) => {
-    const unformattedNum = num.replace(/,/g, '')
-    return parseFloat(unformattedNum)
-}
-
 export const formatter = (value: string) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
 export const parser = (value: string) => value!.replace(/\$\s?|(,*)/g, '')
@@ -80,31 +58,4 @@ export const validateEmail = async (_: any, value: any, column: string) => {
         }
     }
     return Promise.resolve()
-}
-
-export const getFormikErr = (data: any) => {
-    const errorData: any = {}
-    data.forEach((v: any, k: any) => {
-        errorData[k] = v + ''
-    })
-    return errorData
-}
-
-export const getClassIsChange = (valueOld: any, value: any, type = 'string') => {
-    if (type === 'string') {
-        return valueOld !== value && 'is-change'
-    }
-    if (type === 'number') {
-        return valueOld !== +value && 'is-change'
-    }
-
-    return formatDay(valueOld) !== formatDay(value) && 'is-change'
-}
-
-export const formatViewManga = (view: number, unit = UNIT_VIEW) => {
-    return view < unit ? view : view / unit + '万'
-}
-
-export const formatNumberByUnit = (index: number, unit = UNIT_DOZENS) => {
-    return index < unit ? '0' + index : index
 }

@@ -7,4 +7,5 @@ export default {
         string: '{0} không được ít hơn {1} kí tự',
     },
     email: 'Định dạng phải là email',
+    min_value: '{0} phải lớn hơn {1}',
 }
