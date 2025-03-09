@@ -35,13 +35,15 @@ const emits = defineEmits(['onDelete', 'handleAddCart'])
                 />
             </div>
         </router-link>
-        <a-button type="primary" @click="emits('handleAddCart')">{{ t('products.btn_cart') }}</a-button>
+        <a-button type="primary" @click="emits('handleAddCart')">{{
+            t('products.btn_cart')
+        }}</a-button>
     </div>
 </template>
 
 <style lang="scss" scoped>
 .container {
-        display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     .item {

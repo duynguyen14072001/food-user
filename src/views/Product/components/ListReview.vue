@@ -26,17 +26,15 @@ const idDelete = ref()
 const formState: UnwrapRef<ReviewFormState> = reactive({
     ...FORM_REVIEW,
 })
-const user = JSON.parse(getUser() || '')
+const userString: string | null = getUser()
+const user = userString ? JSON.parse(userString) : null
 const query = ref({ ...INITIAL_QUERY, per_page: PER_PAGE_REVIEWS })
 
 const loadMoreReview = async () => {
     loading.value = true
     page.value++
     await getReviews(page.value)
-    maxReviews.value =
-        page.value >
-        Math.ceil(Number(reviewStore.getReviews.total) / Number(reviewStore.getReviews.perPage))
-    Array.isArray(reviewStore.getReviews.data) && reviews.value.push(...reviewStore.getReviews.data)
+    reviewStore.getReviews.data && reviews.value.push(...reviewStore.getReviews.data)
     loading.value = false
 }
 
@@ -68,9 +66,8 @@ const getReviews = async (pageCurrent: number) => {
         ],
     })
     maxReviews.value =
-        page.value >
+        pageCurrent >=
         Math.ceil(Number(reviewStore.getReviews.total) / Number(reviewStore.getReviews.perPage))
-    reviewStore.getReviews.data && (reviews.value = [...reviewStore.getReviews.data])
 }
 
 const onDelete = async () => {
@@ -80,6 +77,7 @@ const onDelete = async () => {
     if (status_code === STATUS_CODE_SUCCESS) {
         notify(t('delete_success'), '', 'success')
         await getReviews(PAGE_FIRST)
+        reviewStore.getReviews.data && (reviews.value = [...reviewStore.getReviews.data])
         page.value = PAGE_FIRST
         return (loading.value = false)
     }
@@ -93,6 +91,7 @@ watch(
         if (props.productId) {
             loading.value = true
             await getReviews(PAGE_FIRST)
+            reviewStore.getReviews.data && (reviews.value = [...reviewStore.getReviews.data])
             loading.value = false
         }
     },
@@ -116,7 +115,7 @@ watch(
             </div>
         </div>
     </div>
-    <div class="form-create">
+    <div v-if="user" class="form-create">
         <a-form :model="formState" :rules="rules" @finish="onFinish" @finishFailed="onFinishFailed">
             <div class="info-review">
                 <div class="info-user">
@@ -154,7 +153,7 @@ watch(
             </div>
             <div class="content">{{ item.comment }}</div>
             <div
-                v-if="item.user_id === user.id"
+                v-if="user && item.user_id === user.id"
                 class="icon-delete"
                 @click="open = true && (idDelete = item.id)"
             >

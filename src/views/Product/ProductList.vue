@@ -12,10 +12,9 @@ const loading = ref()
 const cartStore = useCartStore()
 const query = ref({ ...INITIAL_QUERY, per_page: PER_PAGE_PRODUCTS })
 const listProduct = ref<Product[]>([])
-    const formState: UnwrapRef<any> = reactive({
-})
+const formState: UnwrapRef<any> = reactive({})
 
-const handleAddCart = async (id:number) =>{
+const handleAddCart = async (id: number) => {
     loading.value = true
     const { status_code } = await cartStore.upsert({
         product_id: id,
@@ -62,7 +61,12 @@ onMounted(() => {
 <template>
     <h2>{{ t('products.title') }}</h2>
     <div class="content">
-        <product-item v-for="(item, index) in listProduct" :item="item" :key="index" @handle-add-cart="handleAddCart(item.id)" />
+        <product-item
+            v-for="(item, index) in listProduct"
+            :item="item"
+            :key="index"
+            @handle-add-cart="handleAddCart(item.id)"
+        />
         <a-spin tip="Loading..." :spinning="loading" />
     </div>
 </template>
