@@ -27,3 +27,11 @@ export const update = (payload: Record<string, any>, id: number) => {
         data: payload,
     })
 }
+
+export const detail = (id: number) => {
+    const url = `/orders/${id}`
+    return request<ResponseResult, ResponseResult>({
+        url,
+        method: 'GET',
+    })
+}

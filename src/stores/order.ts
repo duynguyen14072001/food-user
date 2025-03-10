@@ -2,11 +2,12 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import * as API from '@/api/order'
 import { INITIAL_QUERY } from '@/helpers'
-import type { OrderResult, ParamsList } from '@/interface'
+import type { Order, OrderResult, ParamsList } from '@/interface'
 
 export const useOrderStore = defineStore('order', () => {
     const orders = ref({} as OrderResult)
     const query = ref<ParamsList>({})
+    const orderDetail = ref({} as Order)
 
     const list = async (payload: Record<string, any>) => {
         try {
@@ -38,12 +39,25 @@ export const useOrderStore = defineStore('order', () => {
         }
     }
 
+    const detail = async (id: number) => {
+        try {
+            const { result, status_code } = await API.detail(id)
+            orderDetail.value = result
+            return { ...orderDetail.value, status_code }
+        } catch (error: any) {
+            return error
+        }
+    }
+
     const getOrder = computed(() => orders.value)
+    const getOrderDetail = computed(() => orderDetail.value)
 
     return {
         getOrder,
         list,
         update,
+        getOrderDetail,
+        detail,
         create,
     }
 })

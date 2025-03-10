@@ -77,6 +77,12 @@ export const routes: any = [
                 beforeEnter: ifAuthenticated,
             },
             {
+                path: 'orders',
+                name: 'orders',
+                component: Page.OrderView,
+                beforeEnter: ifAuthenticated,
+            },
+            {
                 path: 'forgot-password',
                 name: 'forgot-password',
                 component: Page.ForgotPassword,

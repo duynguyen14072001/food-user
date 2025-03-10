@@ -6,6 +6,7 @@ export interface Order {
     quantity: number
     status: number
     shipping_address: string
+    orderDetails: any
 }
 
 export interface FormStateOrderDetail {
