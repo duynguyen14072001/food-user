@@ -2,7 +2,7 @@
 import { reactive, ref } from 'vue'
 import { useI18n } from 'vue3-i18n'
 import { useRoute, useRouter } from 'vue-router'
-import * as Imgs from '@/assets/imgs'
+import * as Img from '@/assets/imgs'
 import { useAuthStore } from '@/stores/auth'
 import type { ResetPasswordDto } from '@/interface'
 import { notify, STATUS_CODE_SUCCESS } from '@/helpers'
@@ -43,6 +43,9 @@ const trim = (field: 'new_password' | 'conf_password') => {
 
 <template>
     <section className="form-reset">
+        <router-link to="/" class="logo">
+            <img :src="Img.Logo" alt="Logo" />
+        </router-link>
         <div className="content">
             <h4 className="form-title">{{ t('auth.reset_pass.title') }}</h4>
             <a-form
@@ -110,5 +113,17 @@ const trim = (field: 'new_password' | 'conf_password') => {
             justify-content: space-between;
         }
     }
+}
+.logo {
+    display: flex;
+    justify-content: center;
+    img {
+        width: 100px;
+    }
+}
+
+.form-title {
+    text-align: center;
+    margin: 0 0 20px;
 }
 </style>

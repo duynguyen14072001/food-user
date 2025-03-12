@@ -2,7 +2,7 @@
 import { reactive, ref } from 'vue'
 import { useI18n } from 'vue3-i18n'
 import { useRouter } from 'vue-router'
-import * as Imgs from '@/assets/imgs'
+import * as Img from '@/assets/imgs'
 import { useAuthStore } from '@/stores/auth'
 import type { ForgotPasswordDto } from '@/interface'
 import { notify, STATUS_CODE_FORBIDDEN, STATUS_CODE_SUCCESS } from '@/helpers'
@@ -41,8 +41,11 @@ const trim = (field: 'mail_address') => {
 
 <template>
     <section class="form-forgot">
+        <router-link to="/" class="logo">
+            <img :src="Img.Logo" alt="Logo" />
+        </router-link>
         <div class="content">
-            <h4 class="form-title">{{ t('auth.forgot_password.title') }}</h4>
+            <h4 class="form-title">{{ t('auth.forgot_pass.title') }}</h4>
             <a-form
                 name="basic"
                 autocomplete="off"
@@ -91,5 +94,17 @@ const trim = (field: 'mail_address') => {
             justify-content: space-between;
         }
     }
+}
+.logo {
+    display: flex;
+    justify-content: center;
+    img {
+        width: 100px;
+    }
+}
+
+.form-title {
+    text-align: center;
+    margin: 0 0 20px;
 }
 </style>

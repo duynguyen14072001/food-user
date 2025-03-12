@@ -7,7 +7,6 @@ const { t } = useI18n()
 
 <template>
     <footer>
-        <div class="title">{{ t('footer.name') }}</div>
         <div class="content">
             <div class="item">
                 <span class="item-title">{{ t('footer.contact_us') }}</span>
@@ -21,12 +20,12 @@ const { t } = useI18n()
             <div class="item">
                 <span class="item-title">{{ t('footer.follow_us') }}</span>
                 <div class="item-content">
-                    <a href="https://github.com/duynguyen14072001" target="_blank"
-                        ><GithubFilled
-                    /></a>
-                    <a href="https://www.linkedin.com/in/duynguyen14072001/" target="_blank"
-                        ><LinkedinFilled
-                    /></a>
+                    <a href="https://github.com/duynguyen14072001" target="_blank">
+                        <GithubFilled />
+                    </a>
+                    <a href="https://www.linkedin.com/in/duynguyen14072001/" target="_blank">
+                        <LinkedinFilled />
+                    </a>
                 </div>
             </div>
         </div>
@@ -47,11 +46,13 @@ footer {
 
     .content {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
         .item {
             display: flex;
-            gap: 30px;
+            flex-direction: column;
+            gap: 10px;
 
             &-title {
                 font-size: 20px;

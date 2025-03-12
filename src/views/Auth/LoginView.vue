@@ -27,9 +27,9 @@ const onFinish = async (values: any) => {
 
 <template>
     <section className="form-login">
-        <div class="logo">
+        <router-link to="/" class="logo">
             <img :src="Img.Logo" alt="Logo" />
-        </div>
+        </router-link>
         <div class="title">
             {{ t('login') }}
         </div>

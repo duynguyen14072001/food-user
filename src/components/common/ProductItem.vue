@@ -1,10 +1,26 @@
 <script lang="ts" setup>
+import { notify, STATUS_CODE_SUCCESS } from '@/helpers'
+import { useCartStore } from '@/stores'
 import { DeleteOutlined } from '@ant-design/icons-vue'
+import { reactive, type UnwrapRef } from 'vue'
 import { useI18n } from 'vue3-i18n'
 
-defineProps(['item', 'hasDelete'])
+const props = defineProps(['item', 'hasDelete'])
 const { t } = useI18n()
-const emits = defineEmits(['onDelete', 'handleAddCart'])
+const emits = defineEmits(['onDelete'])
+const cartStore = useCartStore()
+const formState: UnwrapRef<any> = reactive({})
+
+const handleAddCart = async () => {
+    const { status_code } = await cartStore.upsert({
+        product_id: props.item.id,
+        quantity: 1,
+    })
+    formState.quantity = 1
+    if (status_code === STATUS_CODE_SUCCESS) {
+        notify(t('products.add_cart_success'), '', 'success')
+    }
+}
 </script>
 
 <template>
@@ -35,9 +51,9 @@ const emits = defineEmits(['onDelete', 'handleAddCart'])
                 />
             </div>
         </router-link>
-        <a-button type="primary" @click="emits('handleAddCart')">{{
-            t('products.btn_cart')
-        }}</a-button>
+        <a-button type="primary" @click="handleAddCart">
+            {{ t('products.btn_cart') }}
+        </a-button>
     </div>
 </template>
 

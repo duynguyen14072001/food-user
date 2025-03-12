@@ -9,23 +9,8 @@ import { PER_PAGE_PRODUCTS } from './shared'
 const { t } = useI18n()
 const productStore = useProductStore()
 const loading = ref()
-const cartStore = useCartStore()
 const query = ref({ ...INITIAL_QUERY, per_page: PER_PAGE_PRODUCTS })
 const listProduct = ref<Product[]>([])
-const formState: UnwrapRef<any> = reactive({})
-
-const handleAddCart = async (id: number) => {
-    loading.value = true
-    const { status_code } = await cartStore.upsert({
-        product_id: id,
-        quantity: 1,
-    })
-    formState.quantity = 1
-    if (status_code === STATUS_CODE_SUCCESS) {
-        notify(t('products.add_cart_success'), '', 'success')
-    }
-    loading.value = false
-}
 
 watchEffect(async () => {
     loading.value = true
@@ -61,12 +46,7 @@ onMounted(() => {
 <template>
     <h2>{{ t('products.title') }}</h2>
     <div class="content">
-        <product-item
-            v-for="(item, index) in listProduct"
-            :item="item"
-            :key="index"
-            @handle-add-cart="handleAddCart(item.id)"
-        />
+        <product-item v-for="(item, index) in listProduct" :item="item" :key="index" />
         <a-spin tip="Loading..." :spinning="loading" />
     </div>
 </template>

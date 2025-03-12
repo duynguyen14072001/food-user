@@ -4,4 +4,5 @@ export default {
     login: 'Đăng nhập',
     signup: 'Đăng ký',
     logout: 'Đăng xuất',
+    cart: 'Giỏ hàng',
 }

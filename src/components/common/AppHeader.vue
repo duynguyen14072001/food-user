@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { ShoppingCartOutlined } from '@ant-design/icons-vue'
+import { LogoutOutlined, ShoppingCartOutlined } from '@ant-design/icons-vue'
 import { useI18n } from 'vue3-i18n'
 import * as Img from '@/assets/imgs'
-import { getToken } from '@/helpers'
+import { getToken, getUser } from '@/helpers'
 
 const { t } = useI18n()
+const userString: string | null = getUser()
+const user = userString ? JSON.parse(userString) : null
 
 const handleLogout = () => {
     localStorage.clear()
@@ -27,11 +29,28 @@ const handleLogout = () => {
                 <router-link to="/signup">{{ t('header.signup') }}</router-link>
             </div>
             <div v-else class="auth">
-                <div class="logout" @click="handleLogout">{{ t('header.logout') }}</div>
+                <a-dropdown placement="topLeft">
+                    <div class="user">
+                        <img :src="user.image_url" alt="" />
+                    </div>
+                    <template #overlay>
+                        <a-menu>
+                            <a-menu-item>
+                                <router-link class="item__link" to="/cart">
+                                    <ShoppingCartOutlined style="font-size: 20px" />
+                                    {{ t('header.cart') }}
+                                </router-link>
+                            </a-menu-item>
+                            <a-menu-item>
+                                <div class="logout item__link" @click="handleLogout">
+                                    <LogoutOutlined style="font-size: 18px" />
+                                    {{ t('header.logout') }}
+                                </div>
+                            </a-menu-item>
+                        </a-menu>
+                    </template>
+                </a-dropdown>
             </div>
-            <router-link to="/cart">
-                <ShoppingCartOutlined v-if="getToken()" style="font-size: 24px" />
-            </router-link>
         </div>
     </div>
 </template>
@@ -82,5 +101,18 @@ const handleLogout = () => {
     .anticon-shopping-cart {
         cursor: pointer;
     }
+}
+
+.user {
+    img {
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.item__link {
+    display: flex;
+    gap: 10px;
 }
 </style>
