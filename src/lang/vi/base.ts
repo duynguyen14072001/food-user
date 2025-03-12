@@ -30,4 +30,7 @@ export default {
             content: 'Bạn có chắc chắn muốn xóa không?',
         },
     },
+    notFound: {
+        back: 'Quay lại trang chủ',
+    },
 }

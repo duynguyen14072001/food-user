@@ -14,12 +14,9 @@ const { t } = useI18n()
                             <h1 class="text-center">404</h1>
                         </div>
                         <div class="contain_box_404">
-                            <h3 class="h2">
-                                {{ t('notFound.title') }}
-                            </h3>
-                            <a href="/reservations" class="link_404">
+                            <router-link to="/" class="link_404">
                                 {{ t('notFound.back') }}
-                            </a>
+                            </router-link>
                         </div>
                     </div>
                 </div>
