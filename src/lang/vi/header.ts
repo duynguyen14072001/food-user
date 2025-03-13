@@ -5,4 +5,5 @@ export default {
     signup: 'Đăng ký',
     logout: 'Đăng xuất',
     cart: 'Giỏ hàng',
+    order: 'Lịch sử mua hàng',
 }

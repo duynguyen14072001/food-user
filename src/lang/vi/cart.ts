@@ -9,6 +9,7 @@ export default {
     },
     button: {
         order: 'Đặt hàng',
+        payment: 'Thanh toán',
     },
     amount_total: 'Tổng tiền:',
     form: {

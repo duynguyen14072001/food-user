@@ -63,10 +63,6 @@ export const ruleSignup = {
             max: MAX_STRING,
             message: t('validation.max.string', [t('name'), MAX_STRING]),
         },
-        {
-            min: MIN_STRING,
-            message: t('validation.min.string', [t('name'), MIN_STRING]),
-        },
     ],
     password: [
         {

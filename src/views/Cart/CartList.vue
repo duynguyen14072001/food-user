@@ -3,9 +3,9 @@ import { getObjOptions, notify, PAYLOAD_ALL, STATUS_CODE_SUCCESS } from '@/helpe
 import { useCartStore, useOrderStore } from '@/stores'
 import { onMounted, reactive, ref, watch } from 'vue'
 import { useI18n } from 'vue3-i18n'
-import { columns, rules } from './shared'
+import { columns, rules, CASH_ON_DELIVERY } from './shared'
 import type { FormStateOrderDetail } from '@/interface'
-import { OPTIONS_PAYMENT_METHOD } from './shared/constants'
+import { ONLINE_PAYMENT, OPTIONS_PAYMENT_METHOD } from './shared/constants'
 import { useRouter } from 'vue-router'
 
 const loading = ref()
@@ -16,6 +16,7 @@ const orderStore = useOrderStore()
 const { t } = useI18n()
 const router = useRouter()
 const cartStore = useCartStore()
+const formRef = ref()
 const formState = reactive<{ orders: FormStateOrderDetail[]; [key: string]: any }>({
     orders: [],
     shipping_address: '',
@@ -48,6 +49,19 @@ const onFinish = async () => {
     }
     return notify(t(`cart.create_order_failed`), '', 'error')
 }
+
+const redirectPaymentOnline = async () => {
+    try {
+        await formRef.value.validate();
+        if (!formState.orders.length) {
+            return notify(t(`cart.no_choose_product`), '', 'error');
+        }
+        console.log("Redirecting to payment...");
+    } catch (error) {
+        console.error('Failed:', error)
+    }
+};
+
 
 const onFinishFailed = (errorInfo: any) => console.error('Failed:', errorInfo)
 
@@ -108,9 +122,10 @@ watch(
             <a-form-item name="note" :label="t('cart.form.label.note')">
                 <a-textarea v-model:value="formState.note" />
             </a-form-item>
-            <a-button class="button" html-type="submit" key="submit" :loading="loadingButton">
+            <a-button v-if="formState.payment_method === CASH_ON_DELIVERY" class="button" html-type="submit" key="submit" :loading="loadingButton">
                 {{ t('cart.button.order') }}
             </a-button>
+            <a-button v-if="formState.payment_method === ONLINE_PAYMENT" class="button" @click="redirectPaymentOnline">{{ t('cart.button.payment') }}</a-button>
         </a-form>
     </a-spin>
 </template>

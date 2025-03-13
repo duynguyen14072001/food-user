@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LogoutOutlined, ShoppingCartOutlined } from '@ant-design/icons-vue'
+import { LogoutOutlined, ShoppingCartOutlined, UnorderedListOutlined } from '@ant-design/icons-vue'
 import { useI18n } from 'vue3-i18n'
 import * as Img from '@/assets/imgs'
 import { getToken, getUser } from '@/helpers'
@@ -29,7 +29,7 @@ const handleLogout = () => {
                 <router-link to="/signup">{{ t('header.signup') }}</router-link>
             </div>
             <div v-else class="auth">
-                <a-dropdown placement="topLeft">
+                <a-dropdown placement="bottomLeft">
                     <div class="user">
                         <img :src="user.image_url" alt="" />
                     </div>
@@ -39,6 +39,12 @@ const handleLogout = () => {
                                 <router-link class="item__link" to="/cart">
                                     <ShoppingCartOutlined style="font-size: 20px" />
                                     {{ t('header.cart') }}
+                                </router-link>
+                            </a-menu-item>
+                            <a-menu-item>
+                                <router-link class="item__link" to="/orders">
+                                    <UnorderedListOutlined style="font-size: 20px" />
+                                    {{ t('header.order') }}
                                 </router-link>
                             </a-menu-item>
                             <a-menu-item>
