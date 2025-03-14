@@ -52,16 +52,17 @@ const onFinish = async () => {
 
 const redirectPaymentOnline = async () => {
     try {
-        await formRef.value.validate();
+        await formRef.value.validate()
         if (!formState.orders.length) {
-            return notify(t(`cart.no_choose_product`), '', 'error');
+            return notify(t(`cart.no_choose_product`), '', 'error')
         }
-        console.log("Redirecting to payment...");
+        await orderStore.createVNPayUrl({
+            amount: amountTotal.value,
+        })
     } catch (error) {
         console.error('Failed:', error)
     }
-};
-
+}
 
 const onFinishFailed = (errorInfo: any) => console.error('Failed:', errorInfo)
 
@@ -122,10 +123,21 @@ watch(
             <a-form-item name="note" :label="t('cart.form.label.note')">
                 <a-textarea v-model:value="formState.note" />
             </a-form-item>
-            <a-button v-if="formState.payment_method === CASH_ON_DELIVERY" class="button" html-type="submit" key="submit" :loading="loadingButton">
+            <a-button
+                v-if="formState.payment_method === CASH_ON_DELIVERY"
+                class="button"
+                html-type="submit"
+                key="submit"
+                :loading="loadingButton"
+            >
                 {{ t('cart.button.order') }}
             </a-button>
-            <a-button v-if="formState.payment_method === ONLINE_PAYMENT" class="button" @click="redirectPaymentOnline">{{ t('cart.button.payment') }}</a-button>
+            <a-button
+                v-if="formState.payment_method === ONLINE_PAYMENT"
+                class="button"
+                @click="redirectPaymentOnline"
+                >{{ t('cart.button.payment') }}</a-button
+            >
         </a-form>
     </a-spin>
 </template>

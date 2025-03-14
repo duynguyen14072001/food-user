@@ -29,6 +29,15 @@ export const useOrderStore = defineStore('order', () => {
         }
     }
 
+    const createVNPayUrl = async (payload: Record<string, any>) => {
+        try {
+            const result = await API.createVNPayUrl(payload)
+            return result
+        } catch (error: any) {
+            return error
+        }
+    }
+
     const update = async (payload: Record<string, any>, id: number) => {
         try {
             const result = await API.update(payload, id)
@@ -57,6 +66,7 @@ export const useOrderStore = defineStore('order', () => {
         list,
         update,
         getOrderDetail,
+        createVNPayUrl,
         detail,
         create,
     }
