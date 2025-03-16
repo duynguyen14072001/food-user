@@ -78,9 +78,20 @@ export const routes: any = [
             },
             {
                 path: 'orders',
-                name: 'orders',
-                component: Page.OrderView,
-                beforeEnter: ifAuthenticated,
+                children: [
+                    {
+                        name: 'orders',
+                        path: '',
+                        component: Page.OrderView,
+                        beforeEnter: ifAuthenticated,
+                    },
+                    {
+                        path: 'vn-pay-return',
+                        name: 'vn-pay-return',
+                        component: Page.VNPayReturnView,
+                        beforeEnter: ifAuthenticated,
+                    },
+                ],
             },
             {
                 path: 'forgot-password',

@@ -22,4 +22,5 @@ export default {
     create_order_success: 'Tạo order thành công',
     create_order_failed: 'Tạo order thất bại',
     no_choose_product: 'Chưa có sản phẩm được chọn',
+    payment_method_no_unavailable: 'Phương thức thanh toán hiện không khả dụng',
 }

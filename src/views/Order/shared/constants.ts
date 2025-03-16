@@ -17,3 +17,4 @@ export const STATUS_METHOD: Record<number, string> = {
 }
 
 export const PER_PAGE_ORDER = 10
+export const VN_PAY_STATUS_CODE_SUCCESS = '00'
