@@ -13,8 +13,7 @@ export const STATUS_PAYMENT: Record<number, string> = {
 
 export const STATUS_METHOD: Record<number, string> = {
     1: 'Thanh toán khi giao hàng',
-    2: 'Thanh toán online',
+    2: 'Thanh toán qua VNPay',
 }
 
 export const PER_PAGE_ORDER = 10
-export const VN_PAY_STATUS_CODE_SUCCESS = '00'

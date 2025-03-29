@@ -8,6 +8,7 @@ import home from './home'
 import cart from './cart'
 import profile from './profile'
 import order from './order'
+import vnpay_return from './vnpay_return'
 
 export const vi = {
     ...base,
@@ -20,4 +21,5 @@ export const vi = {
     cart,
     profile,
     order,
+    vnpay_return,
 }

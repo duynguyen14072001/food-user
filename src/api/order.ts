@@ -28,6 +28,15 @@ export const createVNPayUrl = (payload: Record<string, any>) => {
     })
 }
 
+export const verifyVNPay = (payload: Record<string, any>) => {
+    const url = '/orders/verify_vn_pay'
+    return request<ResponseResult, ResponseResult>({
+        url,
+        method: 'POST',
+        data: payload,
+    })
+}
+
 export const update = (payload: Record<string, any>, id: number) => {
     const url = `/orders/${id}`
     return request<ResponseResult, ResponseResult>({

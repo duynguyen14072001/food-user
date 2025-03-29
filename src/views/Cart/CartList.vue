@@ -56,12 +56,16 @@ const redirectPaymentOnline = async () => {
         if (!formState.orders.length) {
             return notify(t(`cart.no_choose_product`), '', 'error')
         }
-
-        const { status_code, result } = await orderStore.createVNPayUrl({
-            amount: amountTotal.value,
-        })
-        if (status_code === STATUS_CODE_SUCCESS) return (window.location.href = result)
-        return notify(t('cart.payment_method_no_unavailable'), '', 'error')
+        const resultOrder = await orderStore.create(formState)
+        if (resultOrder.status_code === STATUS_CODE_SUCCESS) {
+            const { status_code, result } = await orderStore.createVNPayUrl({
+                amount: amountTotal.value,
+                order_id: +resultOrder.result.id,
+            })
+            if (status_code === STATUS_CODE_SUCCESS) return (window.location.href = result)
+            return notify(t('cart.payment_method_no_unavailable'), '', 'error')
+        }
+        return notify(t(`cart.create_order_failed`), '', 'error')
     } catch (error) {
         console.error('Failed:', error)
     }

@@ -45,11 +45,12 @@ const showDetail = async () => {
                                 {{ t('order.modal.quantity') }}: {{ item.quantity }}
                             </div>
                             <div class="amount">
-                                {{ t('order.modal.amount') }}:{{ item.amount }}{{ t('unit_price') }}
+                                {{ t('order.modal.amount') }}:{{ item.product.price
+                                }}{{ t('unit_price') }}
                             </div>
                         </div>
                     </div>
-                    <div class="total">{{ item.amount * item.quantity }}{{ t('unit_price') }}</div>
+                    <div class="total">{{ item.amount }}{{ t('unit_price') }}</div>
                 </div>
             </a-spin>
         </template>
