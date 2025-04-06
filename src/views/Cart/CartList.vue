@@ -22,6 +22,7 @@ const arrayAddress = ref()
 const formState = reactive<{ orders: FormStateOrderDetail[]; [key: string]: any }>({
     orders: [],
     shipping_address: '',
+    place_id: '',
     note: '',
     payment_method: undefined,
 })
@@ -43,8 +44,8 @@ const rowSelection = {
 
 const onFinish = async () => {
     const { status_code } = await orderStore.create(formState)
-    if (!formState.orders.length) return notify(t(`cart.no_choose_product`), '', 'error')
     if (status_code === STATUS_CODE_SUCCESS) {
+        if (!formState.orders.length) return notify(t(`cart.no_choose_product`), '', 'error')
         await cartStore.remove(selectedKeys.value)
         notify(t('cart.create_order_success'), '', 'success')
         return router.push({ name: 'home' })
@@ -64,7 +65,10 @@ const redirectPaymentOnline = async () => {
                 amount: amountTotal.value,
                 order_id: +resultOrder.result.id,
             })
-            if (status_code === STATUS_CODE_SUCCESS) return (window.location.href = result)
+            if (status_code === STATUS_CODE_SUCCESS) {
+                await cartStore.remove(selectedKeys.value)
+                return (window.location.href = result)
+            }
             return notify(t('cart.payment_method_no_unavailable'), '', 'error')
         }
         return notify(t(`cart.create_order_failed`), '', 'error')
@@ -92,7 +96,10 @@ const handleSearch = async (input: string) => {
     )
 }
 
-const handleChange = (value:any) => formState.shipping_address = value.label
+const handleChange = (value: any) => {
+    formState.shipping_address = value.label
+    formState.place_id = value.key
+}
 
 onMounted(async () => {
     loading.value = true

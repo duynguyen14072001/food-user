@@ -1,4 +1,4 @@
-import { formatDate } from '@/helpers'
+import { formatDateTime } from '@/helpers'
 import type { ColumnTable } from '@/interface'
 import i18n from '@/lang'
 import { STATUS, STATUS_METHOD, STATUS_PAYMENT } from './constants'
@@ -10,8 +10,17 @@ export const columns: ColumnTable[] = [
     {
         title: t('order.column.created_at'),
         key: 'created_at',
+        width: '180px',
         customRender: ({ record }: any) => (
-            <div class="flex-center">{formatDate(record.created_at)}</div>
+            <div class="flex-center">{formatDateTime(record.created_at)}</div>
+        ),
+    },
+    {
+        title: t('order.column.expected_delivery_time'),
+        key: 'expected_delivery_time',
+        width: '180px',
+        customRender: ({ record }: any) => (
+            <div class="flex-center">{formatDateTime(record.expected_delivery_time)}</div>
         ),
     },
     {

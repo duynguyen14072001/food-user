@@ -13,6 +13,11 @@ export const formatDate = (day: any, format = 'YYYY-MM-DD') => {
     return dayjs(day).format(format)
 }
 
+export const formatDateTime = (day: any, format = 'YYYY-MM-DD HH:mm') => {
+    if (!day) return ''
+    return dayjs(day).format(format)
+}
+
 export const formatDayJS = (day: any, format = 'YYYY-MM-DD') => {
     if (!day) return ''
     return dayjs(day, format)

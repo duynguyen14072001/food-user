@@ -1,7 +1,8 @@
 export default {
     title: 'Danh sách đơn đã đặt',
     column: {
-        created_at: 'Ngày đặt đơn',
+        created_at: 'Thời gian đặt đơn',
+        expected_delivery_time: 'Thời gian giao hàng dự kiến',
         item_count: 'Số lượng item đã đặt',
         total_price: 'Tổng tiền',
         status: 'Trạng thái',
