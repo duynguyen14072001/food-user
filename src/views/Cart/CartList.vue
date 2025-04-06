@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { getObjOptions, notify, PAYLOAD_ALL, STATUS_CODE_SUCCESS } from '@/helpers'
+import { getObjOptions, getOptions, notify, PAYLOAD_ALL, STATUS_CODE_SUCCESS } from '@/helpers'
 import { useCartStore, useOrderStore } from '@/stores'
 import { onMounted, reactive, ref, watch } from 'vue'
 import { useI18n } from 'vue3-i18n'
@@ -17,6 +17,8 @@ const { t } = useI18n()
 const router = useRouter()
 const cartStore = useCartStore()
 const formRef = ref()
+let autocompleteService = null as any
+const arrayAddress = ref()
 const formState = reactive<{ orders: FormStateOrderDetail[]; [key: string]: any }>({
     orders: [],
     shipping_address: '',
@@ -73,8 +75,30 @@ const redirectPaymentOnline = async () => {
 
 const onFinishFailed = (errorInfo: any) => console.error('Failed:', errorInfo)
 
+const handleSearch = async (input: string) => {
+    autocompleteService.getPlacePredictions(
+        {
+            input,
+            componentRestrictions: { country: 'vn' },
+        },
+        (predictions: any, status: any) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                arrayAddress.value = predictions.map((item: any) => ({
+                    description: item.description,
+                    id: item.place_id,
+                }))
+            }
+        }
+    )
+}
+
+const handleChange = (value:any) => formState.shipping_address = value.label
+
 onMounted(async () => {
     loading.value = true
+    if (window.google && window.google.maps) {
+        autocompleteService = new window.google.maps.places.AutocompleteService()
+    }
     await cartStore.list(PAYLOAD_ALL)
     loading.value = false
 })
@@ -119,7 +143,15 @@ watch(
             @finishFailed="onFinishFailed"
         >
             <a-form-item name="shipping_address" :label="t('cart.form.label.shipping_address')">
-                <a-input v-model:value="formState.shipping_address" />
+                <a-select
+                    show-search
+                    :options="getOptions(arrayAddress, 'description')"
+                    :filterOption="false"
+                    :notFoundContent="null"
+                    :labelInValue="true"
+                    @search="handleSearch"
+                    @change="handleChange"
+                />
             </a-form-item>
             <a-form-item name="payment_method" :label="t('cart.form.label.payment_method')">
                 <a-select

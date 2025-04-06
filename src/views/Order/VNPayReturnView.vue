@@ -78,7 +78,7 @@ onMounted(async () => {
                 </div>
                 <div class="amount">
                     <span class="label">{{ t('vnpay_return.total') }}</span>
-                    <span>{{ Number(query.vnp_Amount)/ 100 }}{{ t('unit_price') }}</span>
+                    <span>{{ Number(query.vnp_Amount) / 100 }}{{ t('unit_price') }}</span>
                 </div>
             </div>
             <a-button type="primary">
