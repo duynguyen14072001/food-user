@@ -7,6 +7,11 @@ export interface Order {
     status: number
     shipping_address: string
     orderDetails: any
+    created_at: any
+    expected_delivery_time: any
+    total_price: any
+    payment_status: any
+    payment_method: any
 }
 
 export interface FormStateOrderDetail {

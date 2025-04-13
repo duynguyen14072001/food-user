@@ -53,3 +53,11 @@ export const detail = (id: number) => {
         method: 'GET',
     })
 }
+
+export const detailReturn = (id: number) => {
+    const url = `/orders/return/${id}`
+    return request<ResponseResult, ResponseResult>({
+        url,
+        method: 'GET',
+    })
+}

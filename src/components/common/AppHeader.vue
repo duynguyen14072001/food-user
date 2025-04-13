@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { LogoutOutlined, ShoppingCartOutlined, UnorderedListOutlined } from '@ant-design/icons-vue'
+import {
+    LogoutOutlined,
+    ShoppingCartOutlined,
+    UnorderedListOutlined,
+    UserOutlined,
+} from '@ant-design/icons-vue'
 import { useI18n } from 'vue3-i18n'
 import * as Img from '@/assets/imgs'
 import { getToken, getUser } from '@/helpers'
@@ -35,6 +40,12 @@ const handleLogout = () => {
                     </div>
                     <template #overlay>
                         <a-menu>
+                            <a-menu-item>
+                                <router-link class="item__link" to="/profile">
+                                    <UserOutlined style="font-size: 20px" />
+                                    {{ t('header.profile') }}
+                                </router-link>
+                            </a-menu-item>
                             <a-menu-item>
                                 <router-link class="item__link" to="/cart">
                                     <ShoppingCartOutlined style="font-size: 20px" />

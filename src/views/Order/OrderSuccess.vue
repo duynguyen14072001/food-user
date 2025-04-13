@@ -1,39 +1,30 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
-import { CheckOutlined, ExclamationOutlined } from '@ant-design/icons-vue'
-import { useI18n } from 'vue3-i18n'
-import { formatDate, formatDayJS, notify, STATUS_CODE_SUCCESS } from '@/helpers'
 import { useOrderStore } from '@/stores'
 import dayjs from 'dayjs'
+import { onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue3-i18n'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
+import { STATUS_CODE_SUCCESS } from '@/helpers'
+import { CheckOutlined } from '@ant-design/icons-vue'
+import { STATUS, STATUS_METHOD, STATUS_PAYMENT } from './shared'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
-const { query } = useRoute()
+const { t } = useI18n()
 const orderStore = useOrderStore()
 const loading = ref()
-const { t } = useI18n()
-const checked = ref()
-
-const handlePayment = async () => {
-    if (query.vnp_Amount && query.vnp_TxnRef) {
-        const { status_code, result } = await orderStore.createVNPayUrl({
-            amount: +query.vnp_Amount / 100,
-            order_id: +query.vnp_TxnRef.toString().split('_')[0],
-        })
-        if (status_code === STATUS_CODE_SUCCESS) return (window.location.href = result)
-        return notify(t('cart.payment_method_no_unavailable'), '', 'error')
-    }
-}
+const router = useRouter()
+const { params } = useRoute()
 
 onMounted(async () => {
     loading.value = true
-    const { result } = await orderStore.verifyVNPay(query)
-    checked.value = result
-    query.vnp_TxnRef && (await orderStore.detail(+query.vnp_TxnRef.toString().split('_')[0]))
+    const { status_code } = await orderStore.detailReturn(+params.id)
+    if (status_code !== STATUS_CODE_SUCCESS) {
+        return router.push({ name: 'page-not-found' })
+    }
     loading.value = false
 })
 </script>
@@ -41,17 +32,14 @@ onMounted(async () => {
 <template>
     <a-spin tip="Loading..." :spinning="loading">
         <div class="box">
-            <div v-if="checked" class="icon">
+            <div class="icon">
                 <CheckOutlined style="color: green; font-size: 20px" />
             </div>
-            <div v-else class="icon-error">
-                <ExclamationOutlined style="color: red; font-size: 20px" />
-            </div>
-            <div class="title">{{ t(`vnpay_return.${checked ? 'success' : 'failed'}.title`) }}</div>
+            <div class="title">{{ t(`order_success.title`) }}</div>
             <div class="box-info">
                 <div class="info-list">
                     <div class="info__item">
-                        <span class="label">{{ t('vnpay_return.created_at') }}</span>
+                        <span class="label">{{ t('order_success.created_at') }}</span>
                         <span>
                             {{
                                 dayjs
@@ -62,7 +50,7 @@ onMounted(async () => {
                         </span>
                     </div>
                     <div class="info__item">
-                        <span class="label">{{ t('vnpay_return.expected_delivery_time') }}</span>
+                        <span class="label">{{ t('order_success.expected_delivery_time') }}</span>
                         <span>
                             {{
                                 dayjs
@@ -73,27 +61,21 @@ onMounted(async () => {
                         </span>
                     </div>
                     <div class="info__item">
-                        <span class="label">{{ t('vnpay_return.date') }}</span>
-                        <span>
-                            {{
-                                formatDate(
-                                    formatDayJS(
-                                        query.vnp_OrderInfo?.toString().split(' - ')[1],
-                                        'YYYYMMDDHHmmss'
-                                    ),
-                                    'DD-MM-YYYY HH:mm:ss'
-                                )
-                            }}
-                        </span>
+                        <span class="label">{{ t('order_success.status') }}</span>
+                        <span>{{ STATUS[orderStore.getOrderDetail.status] }}</span>
                     </div>
                     <div class="info__item">
-                        <span class="label">{{ t('vnpay_return.payment_method') }}</span>
-                        <span>{{ t('vnpay_return.method_vnpay') }}</span>
+                        <span class="label">{{ t('order_success.payment_method') }}</span>
+                        <span>{{ STATUS_METHOD[orderStore.getOrderDetail.payment_method] }}</span>
+                    </div>
+                    <div class="info__item">
+                        <span class="label">{{ t('order_success.status_payment') }}</span>
+                        <span>{{ STATUS_PAYMENT[orderStore.getOrderDetail.payment_status] }}</span>
                     </div>
                 </div>
                 <div class="order_summary">
                     <div class="order_summary_title">
-                        {{ t('vnpay_return.order_summary') }}
+                        {{ t('order_success.order_summary') }}
                     </div>
                     <div
                         class="order_summary__item"
@@ -105,15 +87,12 @@ onMounted(async () => {
                     </div>
                 </div>
                 <div class="amount">
-                    <span class="label">{{ t('vnpay_return.total') }}</span>
-                    <span>{{ Number(query.vnp_Amount) / 100 }}{{ t('unit_price') }}</span>
+                    <span class="label">{{ t('order_success.total') }}</span>
+                    <span>{{ orderStore.getOrderDetail.total_price }}{{ t('unit_price') }}</span>
                 </div>
             </div>
             <a-button type="primary">
-                <router-link to="/">{{ t('vnpay_return.back_homepage') }}</router-link>
-            </a-button>
-            <a-button v-if="!checked" @click="handlePayment">
-                {{ t('vnpay_return.payment_again') }}
+                <router-link to="/">{{ t('order_success.back_homepage') }}</router-link>
             </a-button>
         </div>
     </a-spin>

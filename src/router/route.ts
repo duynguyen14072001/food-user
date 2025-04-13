@@ -91,6 +91,12 @@ export const routes: any = [
                         component: Page.VNPayReturnView,
                         beforeEnter: ifAuthenticated,
                     },
+                    {
+                        path: 'order-success/:id',
+                        name: 'order-success',
+                        component: Page.OrderSuccess,
+                        beforeEnter: ifAuthenticated,
+                    },
                 ],
             },
             {

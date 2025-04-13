@@ -43,12 +43,12 @@ const rowSelection = {
 }
 
 const onFinish = async () => {
-    const { status_code } = await orderStore.create(formState)
+    const { status_code, result } = await orderStore.create(formState)
     if (status_code === STATUS_CODE_SUCCESS) {
         if (!formState.orders.length) return notify(t(`cart.no_choose_product`), '', 'error')
         await cartStore.remove(selectedKeys.value)
         notify(t('cart.create_order_success'), '', 'success')
-        return router.push({ name: 'home' })
+        return router.push({ name: 'order-success', params: { id: result.id } })
     }
     return notify(t(`cart.create_order_failed`), '', 'error')
 }

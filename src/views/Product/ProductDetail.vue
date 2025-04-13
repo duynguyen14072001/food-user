@@ -84,7 +84,12 @@ onMounted(async () => {
                 <div class="price">
                     {{ productStore.getProductDetail.price }} {{ t('unit_price') }}
                 </div>
-                <a-input-number :min="1" :max="100000" v-model:value="formState.quantity" />
+                <a-input-number
+                    class="quantity"
+                    :min="1"
+                    :max="100000"
+                    v-model:value="formState.quantity"
+                />
                 <div class="btn-group">
                     <a-button @click="handleAddCart">{{ t('products.btn_cart') }}</a-button>
                 </div>
@@ -138,6 +143,11 @@ onMounted(async () => {
                 border-radius: 4px;
                 padding: 2px 4px;
             }
+        }
+
+        .price,
+        .quantity {
+            margin: 0 0 20px;
         }
     }
 }

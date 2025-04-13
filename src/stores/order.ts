@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import * as API from '@/api/order'
-import { INITIAL_QUERY } from '@/helpers'
 import type { Order, OrderResult, ParamsList } from '@/interface'
 
 export const useOrderStore = defineStore('order', () => {
@@ -66,6 +65,16 @@ export const useOrderStore = defineStore('order', () => {
         }
     }
 
+    const detailReturn = async (id: number) => {
+        try {
+            const { result, status_code } = await API.detailReturn(id)
+            orderDetail.value = result
+            return { ...orderDetail.value, status_code }
+        } catch (error: any) {
+            return error
+        }
+    }
+
     const getOrder = computed(() => orders.value)
     const getOrderDetail = computed(() => orderDetail.value)
 
@@ -78,5 +87,6 @@ export const useOrderStore = defineStore('order', () => {
         verifyVNPay,
         detail,
         create,
+        detailReturn,
     }
 })
