@@ -110,6 +110,7 @@ onMounted(async () => {
         width: 400px;
         .main-image {
             height: 400px;
+            width: 100%;
             margin-bottom: 20px;
         }
 
