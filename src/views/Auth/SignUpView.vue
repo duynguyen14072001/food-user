@@ -18,7 +18,10 @@ const onFinishFailed = (errorInfo: any) => console.error('Failed:', errorInfo)
 const onFinish = async (values: any) => {
     const { status_code, message } = await authStore.signup({ ...values })
     if (status_code !== STATUS_CODE_SUCCESS) {
-        return notify(t('auth_failed'), '', 'error')
+        if (message === 'Email exits') {
+            return notify(t('email_exists'), '', 'error')
+        }
+        return notify(t('signup_failed'), '', 'error')
     }
     notify(message, t('signup_success'), 'success')
     router.push({ name: 'login' })
