@@ -64,7 +64,7 @@ const showDetail = async () => {
 
 .order__item {
     border-bottom: 1px solid var(--vt-c-gray-5);
-    padding-bottom: 20px;
+    padding: 20px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;

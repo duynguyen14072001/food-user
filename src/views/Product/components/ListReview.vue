@@ -45,6 +45,7 @@ const onFinish = async () => {
     const { status_code } = await reviewStore.create({ ...formState, product_id: props.productId })
     if (status_code === STATUS_CODE_SUCCESS) {
         await getReviews(PAGE_FIRST)
+        reviewStore.getReviews.data && (reviews.value = [...reviewStore.getReviews.data])
         page.value = PAGE_FIRST
         Object.assign(formState, FORM_REVIEW)
         notify(t('create_success'), '', 'success')
