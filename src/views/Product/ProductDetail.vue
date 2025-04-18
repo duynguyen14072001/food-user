@@ -90,13 +90,12 @@ onMounted(async () => {
                     :max="100000"
                     v-model:value="formState.quantity"
                 />
+                <div class="description">{{ productStore.getProductDetail.description }}</div>
                 <div class="btn-group">
                     <a-button @click="handleAddCart">{{ t('products.btn_cart') }}</a-button>
                 </div>
             </div>
         </div>
-
-        <div class="description">{{ productStore.getProductDetail.description }}</div>
 
         <ListReview :product-id="productStore.getProductDetail.id" />
     </a-spin>
@@ -106,6 +105,7 @@ onMounted(async () => {
 .container {
     display: flex;
     gap: 40px;
+    justify-content: center;
     .banner {
         width: 400px;
         .main-image {
@@ -147,7 +147,8 @@ onMounted(async () => {
         }
 
         .price,
-        .quantity {
+        .quantity,
+        .description {
             margin: 0 0 20px;
         }
     }
