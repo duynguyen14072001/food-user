@@ -17,8 +17,7 @@ const onDelete = async () => {
     return notify(t('delete_failed'), '', 'error')
 }
 
-const handleRemove = () => open.value = true
-
+const handleRemove = () => (open.value = true)
 </script>
 
 <template>

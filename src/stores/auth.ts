@@ -40,7 +40,9 @@ export const useAuthStore = defineStore('auth', () => {
 
     const updateInfo = async (payload: any | {}) => {
         try {
-            return await API.updateInfo(payload)
+            await API.updateInfo(payload)
+            const { result } = await getMe()
+            localStorage.setItem('user', JSON.stringify(result))
         } catch (error: any) {
             return error
         }

@@ -7,11 +7,12 @@ import {
 } from '@ant-design/icons-vue'
 import { useI18n } from 'vue3-i18n'
 import * as Img from '@/assets/imgs'
-import { getToken, getUser } from '@/helpers'
+import { getToken } from '@/helpers'
+import { useAuthStore } from '@/stores'
 
 const { t } = useI18n()
-const userString: string | null = getUser()
-const user = userString ? JSON.parse(userString) : null
+
+const authStore = useAuthStore()
 
 const handleLogout = () => {
     localStorage.clear()
@@ -36,7 +37,7 @@ const handleLogout = () => {
             <div v-else class="auth">
                 <a-dropdown placement="bottomLeft">
                     <div class="user">
-                        <img :src="user.image_url" alt="" />
+                        <img :src="authStore.getUser.image_url" alt="" />
                     </div>
                     <template #overlay>
                         <a-menu>
@@ -125,6 +126,7 @@ const handleLogout = () => {
         cursor: pointer;
         width: 40px;
         height: 40px;
+        border-radius: 100%;
     }
 }
 
