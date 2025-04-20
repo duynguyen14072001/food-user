@@ -40,83 +40,87 @@ onMounted(async () => {
 
 <template>
     <a-spin tip="Loading..." :spinning="loading">
-        <div class="box">
-            <div v-if="checked" class="icon">
-                <CheckOutlined style="color: green; font-size: 20px" />
-            </div>
-            <div v-else class="icon-error">
-                <ExclamationOutlined style="color: red; font-size: 20px" />
-            </div>
-            <div class="title">{{ t(`vnpay_return.${checked ? 'success' : 'failed'}.title`) }}</div>
-            <div class="box-info">
-                <div class="info-list">
-                    <div class="info__item">
-                        <span class="label">{{ t('vnpay_return.created_at') }}</span>
-                        <span>
-                            {{
-                                dayjs
-                                    .utc(orderStore.getOrderDetail.created_at)
-                                    .tz('Asia/Ho_Chi_Minh')
-                                    .format('DD-MM-YYYY HH:mm:ss')
-                            }}
-                        </span>
-                    </div>
-                    <div class="info__item">
-                        <span class="label">{{ t('vnpay_return.expected_delivery_time') }}</span>
-                        <span>
-                            {{
-                                dayjs
-                                    .utc(orderStore.getOrderDetail.expected_delivery_time)
-                                    .tz('Asia/Ho_Chi_Minh')
-                                    .format('DD-MM-YYYY HH:mm:ss')
-                            }}
-                        </span>
-                    </div>
-                    <div class="info__item">
-                        <span class="label">{{ t('vnpay_return.date') }}</span>
-                        <span>
-                            {{
-                                dayjs
-                                    .utc(
-                                        formatDayJS(
+        <div v-if="!loading">
+            <div class="box">
+                <div v-if="checked" class="icon">
+                    <CheckOutlined style="color: green; font-size: 20px" />
+                </div>
+                <div v-else class="icon-error">
+                    <ExclamationOutlined style="color: red; font-size: 20px" />
+                </div>
+                <div class="title">
+                    {{ t(`vnpay_return.${checked ? 'success' : 'failed'}.title`) }}
+                </div>
+                <div class="box-info">
+                    <div class="info-list">
+                        <div class="info__item">
+                            <span class="label">{{ t('vnpay_return.created_at') }}</span>
+                            <span>
+                                {{
+                                    dayjs
+                                        .utc(orderStore.getOrderDetail.created_at)
+                                        .tz('Asia/Ho_Chi_Minh')
+                                        .format('DD-MM-YYYY HH:mm:ss')
+                                }}
+                            </span>
+                        </div>
+                        <div class="info__item">
+                            <span class="label">{{
+                                t('vnpay_return.expected_delivery_time')
+                            }}</span>
+                            <span>
+                                {{
+                                    dayjs
+                                        .utc(orderStore.getOrderDetail.expected_delivery_time)
+                                        .tz('Asia/Ho_Chi_Minh')
+                                        .format('DD-MM-YYYY HH:mm:ss')
+                                }}
+                            </span>
+                        </div>
+                        <div class="info__item">
+                            <span class="label">{{ t('vnpay_return.date') }}</span>
+                            <span>
+                                {{
+                                    dayjs
+                                        .utc(
                                             query.vnp_OrderInfo?.toString().split(' - ')[1],
                                             'YYYYMMDDHHmmss'
                                         )
-                                    )
-                                    .tz('Asia/Ho_Chi_Minh')
-                                    .format('DD-MM-YYYY HH:mm:ss')
-                            }}
-                        </span>
+                                        .tz('Asia/Ho_Chi_Minh')
+                                        .format('DD-MM-YYYY HH:mm:ss')
+                                }}
+                            </span>
+                        </div>
+                        <div class="info__item">
+                            <span class="label">{{ t('vnpay_return.payment_method') }}</span>
+                            <span>{{ t('vnpay_return.method_vnpay') }}</span>
+                        </div>
                     </div>
-                    <div class="info__item">
-                        <span class="label">{{ t('vnpay_return.payment_method') }}</span>
-                        <span>{{ t('vnpay_return.method_vnpay') }}</span>
+                    <div class="order_summary">
+                        <div class="order_summary_title">
+                            {{ t('vnpay_return.order_summary') }}
+                        </div>
+                        <div
+                            class="order_summary__item"
+                            v-for="(item, index) in orderStore.getOrderDetail.orderDetails"
+                            :key="index"
+                        >
+                            <div class="name">{{ item.product.name }}</div>
+                            <div class="amount">{{ item.amount }}{{ t('unit_price') }}</div>
+                        </div>
+                    </div>
+                    <div class="amount">
+                        <span class="label">{{ t('vnpay_return.total') }}</span>
+                        <span>{{ Number(query.vnp_Amount) / 100 }}{{ t('unit_price') }}</span>
                     </div>
                 </div>
-                <div class="order_summary">
-                    <div class="order_summary_title">
-                        {{ t('vnpay_return.order_summary') }}
-                    </div>
-                    <div
-                        class="order_summary__item"
-                        v-for="(item, index) in orderStore.getOrderDetail.orderDetails"
-                        :key="index"
-                    >
-                        <div class="name">{{ item.product.name }}</div>
-                        <div class="amount">{{ item.amount }}{{ t('unit_price') }}</div>
-                    </div>
-                </div>
-                <div class="amount">
-                    <span class="label">{{ t('vnpay_return.total') }}</span>
-                    <span>{{ Number(query.vnp_Amount) / 100 }}{{ t('unit_price') }}</span>
-                </div>
+                <a-button type="primary">
+                    <router-link to="/">{{ t('vnpay_return.back_homepage') }}</router-link>
+                </a-button>
+                <a-button v-if="!checked" @click="handlePayment">
+                    {{ t('vnpay_return.payment_again') }}
+                </a-button>
             </div>
-            <a-button type="primary">
-                <router-link to="/">{{ t('vnpay_return.back_homepage') }}</router-link>
-            </a-button>
-            <a-button v-if="!checked" @click="handlePayment">
-                {{ t('vnpay_return.payment_again') }}
-            </a-button>
         </div>
     </a-spin>
 </template>
