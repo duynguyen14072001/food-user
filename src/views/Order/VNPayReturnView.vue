@@ -76,13 +76,15 @@ onMounted(async () => {
                         <span class="label">{{ t('vnpay_return.date') }}</span>
                         <span>
                             {{
-                                formatDate(
-                                    formatDayJS(
-                                        query.vnp_OrderInfo?.toString().split(' - ')[1],
-                                        'YYYYMMDDHHmmss'
-                                    ),
-                                    'DD-MM-YYYY HH:mm:ss'
-                                )
+                                dayjs
+                                    .utc(
+                                        formatDayJS(
+                                            query.vnp_OrderInfo?.toString().split(' - ')[1],
+                                            'YYYYMMDDHHmmss'
+                                        )
+                                    )
+                                    .tz('Asia/Ho_Chi_Minh')
+                                    .format('DD-MM-YYYY HH:mm:ss')
                             }}
                         </span>
                     </div>
