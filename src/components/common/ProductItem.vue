@@ -87,6 +87,7 @@ const handleAddCart = async () => {
         }
         .name {
             padding: 10px 10px 0;
+            gap: 20px;
             display: flex;
             justify-content: space-between;
             font-weight: bold;

@@ -20,8 +20,8 @@ const handleLogout = () => {
     window.location.reload()
 }
 
-onMounted(async() =>{
-    if(getToken()) {
+onMounted(async () => {
+    if (getToken()) {
         await authStore.getMe()
     }
 })
