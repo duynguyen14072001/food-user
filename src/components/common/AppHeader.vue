@@ -9,6 +9,7 @@ import { useI18n } from 'vue3-i18n'
 import * as Img from '@/assets/imgs'
 import { getToken } from '@/helpers'
 import { useAuthStore } from '@/stores'
+import { onMounted } from 'vue'
 
 const { t } = useI18n()
 
@@ -18,6 +19,12 @@ const handleLogout = () => {
     localStorage.clear()
     window.location.reload()
 }
+
+onMounted(async() =>{
+    if(getToken()) {
+        await authStore.getMe()
+    }
+})
 </script>
 
 <template>
